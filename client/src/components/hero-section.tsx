@@ -36,11 +36,11 @@ export default function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                onClick={() => scrollToSection("projects")}
+                onClick={() => scrollToSection("experience")}
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
               >
-                View My Work
+                View My Experience
               </Button>
               <Button 
                 onClick={() => scrollToSection("contact")}
