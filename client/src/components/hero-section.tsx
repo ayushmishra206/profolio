@@ -60,7 +60,7 @@ export default function HeroSection() {
                 <Mail className="w-6 h-6" />
               </a>
               <a 
-                href="https://github.com/ayushmishra" 
+                href="https://github.com/ayushmishra206" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-500 hover:text-primary transition-colors duration-200"
@@ -90,7 +90,7 @@ export default function HeroSection() {
           </div>
           <div className="animate-slide-up lg:pl-8">
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
+              src="https://www.drupal.org/files/styles/grid-2-2x-square/public/user-pictures/picture-3649361-1592237320.png" 
               alt="Professional developer portrait" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-300"
             />

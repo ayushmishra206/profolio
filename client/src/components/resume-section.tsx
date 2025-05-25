@@ -1,16 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Download, FileText } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+
+const GOOGLE_DOC_ID = '1IvrdXyAMyVwRIprCViROXEEkI5x98SvRNirkh1NGaQY';
 
 export default function ResumeSection() {
-  const { toast } = useToast();
+  const handleDownloadResume = async () => {
+    try {
+      // Replace GOOGLE_DOC_ID with your actual Google Doc ID
+      const googleDocsUrl = `https://docs.google.com/document/d/${GOOGLE_DOC_ID}/export?format=pdf`;
+      
+      const response = await fetch(googleDocsUrl);
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch resume');
+      }
 
-  const handleDownloadResume = () => {
-    // In a real implementation, this would trigger the actual PDF download
-    toast({
-      title: "Resume Download",
-      description: "Resume download functionality would be implemented here with the actual PDF file.",
-    });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'Ayush-Resume.pdf'; // Customize filename
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      toast({
+        title: "Success!",
+        description: "Resume downloaded successfully.",
+      });
+    } catch (error) {
+      console.error('Download failed:', error);
+      toast({
+        title: "Download Failed",
+        description: "Unable to download resume. Please try again later.",
+        variant: "destructive",
+      });
+    }
   };
 
   const stats = [
@@ -43,7 +70,7 @@ export default function ResumeSection() {
             </Button>
             <div className="flex items-center text-blue-100 text-sm">
               <FileText className="mr-2 w-4 h-4" />
-              <span>Last updated: January 2024</span>
+              <span>Last updated: May 2025</span>
             </div>
           </div>
           
