@@ -207,19 +207,28 @@ export default function SkillsSection() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <GraduationCap className="text-2xl text-blue-600" />
                 </div>
+                <h4 className="font-semibold text-slate-900 mb-2">Bachelor of Computer Applications</h4>
+                <p className="text-slate-600 mb-1">Manipal University Jaipur</p>
+                <p className="text-sm text-slate-500">8.5 GPA • 2017-2020</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <GraduationCap className="text-2xl text-blue-600" />
+                </div>
                 <h4 className="font-semibold text-slate-900 mb-2">Master of Computer Applications</h4>
                 <p className="text-slate-600 mb-1">Chandigarh University (Online)</p>
                 <p className="text-sm text-slate-500">8.0 GPA • 2021-2023</p>
               </div>
-              
-              <div className="text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Award className="text-2xl text-green-600" />
-                </div>
-                <h4 className="font-semibold text-slate-900 mb-2">Google Summer of Code</h4>
-                <p className="text-slate-600 mb-1">Mentor Certification</p>
-                <p className="text-sm text-slate-500">Drupal Association • 2024</p>
+            </div>
+            
+            <div className="mt-8 text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="text-2xl text-green-600" />
               </div>
+              <h4 className="font-semibold text-slate-900 mb-2">Google Summer of Code</h4>
+              <p className="text-slate-600 mb-1">Mentor Certification</p>
+              <p className="text-sm text-slate-500">Drupal Association • 2024</p>
             </div>
           </CardContent>
         </Card>
