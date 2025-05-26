@@ -1,6 +1,29 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+// Validate email configuration
+if (!process.env.MAIL_USER || !process.env.MAIL_APP_PASSWORD) {
+  throw new Error('Email configuration missing. Check your .env file.');
+}
+
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.MAIL_PORT || '587'),
+  secure: false,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_APP_PASSWORD
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
 
 const app = express();
 app.use(express.json());
@@ -68,3 +91,12 @@ app.use((req, res, next) => {
     log(`serving on port ${port}`);
   });
 })();
+
+// Move verify after all configurations
+transporter.verify((error, success) => {
+  if (error) {
+    log('SMTP connection error:', error);
+  } else {
+    log('SMTP server is ready to take messages');
+  }
+});
