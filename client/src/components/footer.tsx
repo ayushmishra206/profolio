@@ -36,17 +36,17 @@ export default function Footer() {
     },
     { 
       icon: Github, 
-      href: "https://github.com/ayushmishra",
+      href: "https://github.com/ayushmishra206",
       ariaLabel: "GitHub"
     },
     { 
       icon: Linkedin, 
-      href: "https://linkedin.com/in/ayushmishra",
+      href: "https://linkedin.com/in/ayushmishra206",
       ariaLabel: "LinkedIn"
     },
     { 
       icon: SiDrupal, 
-      href: "https://drupal.org/u/ayushmishra",
+      href: "https://drupal.org/u/ayushmishra206",
       ariaLabel: "Drupal.org Profile"
     },
   ];

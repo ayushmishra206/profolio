@@ -69,7 +69,7 @@ export default function HeroSection() {
                 <Github className="w-6 h-6" />
               </a>
               <a 
-                href="https://linkedin.com/in/ayushmishra" 
+                href="https://linkedin.com/in/ayushmishra206" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-500 hover:text-primary transition-colors duration-200"
@@ -78,7 +78,7 @@ export default function HeroSection() {
                 <Linkedin className="w-6 h-6" />
               </a>
               <a 
-                href="https://drupal.org/u/ayushmishra" 
+                href="https://drupal.org/u/ayushmishra206" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-slate-500 hover:text-primary transition-colors duration-200"
@@ -90,7 +90,7 @@ export default function HeroSection() {
           </div>
           <div className="animate-slide-up lg:pl-8">
             <img 
-              src="https://www.drupal.org/files/styles/grid-2-2x-square/public/user-pictures/picture-3649361-1592237320.png" 
+              src="https://avatars.githubusercontent.com/u/30470224?v=4" 
               alt="Professional developer portrait" 
               className="rounded-2xl shadow-2xl w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-300"
             />

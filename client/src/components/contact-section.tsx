@@ -97,17 +97,17 @@ export default function ContactSection() {
     {
       icon: Github,
       label: "GitHub Profile",
-      href: "https://github.com/ayushmishra"
+      href: "https://github.com/ayushmishra206"
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
-      href: "https://linkedin.com/in/ayushmishra"
+      href: "https://linkedin.com/in/ayushmishra206"
     },
     {
       icon: SiDrupal,
       label: "Drupal.org Profile",
-      href: "https://drupal.org/u/ayushmishra"
+      href: "https://drupal.org/u/ayushmishra206"
     }
   ];
 

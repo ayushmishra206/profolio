@@ -12,7 +12,8 @@ export default function ExperienceSection() {
       description: "Leading technical architecture and development for complex Drupal and CiviCRM solutions, managing multiple concurrent projects and driving technical excellence across development teams.",
       achievements: [
         "Managed 5+ concurrent Drupal projects with complex CiviCRM integrations",
-        "Led teams of 3-5+ engineers as technical architect",
+        'Ensured code quality; zero critical QA issues, cut delays 10%.',
+        'Enhanced documentation, reducing issue clarification time by 15%.',
         "Achieved zero critical post-launch QA issues",
         "Reduced project delays by 10% through proactive problem-solving"
       ],
