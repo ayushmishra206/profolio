@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { generateContactEmailTemplate } from './emailTemplates';
 
 dotenv.config();
 
@@ -28,21 +29,15 @@ export const sendMail = async (data: {
   projectType?: string;
 }) => {
   try {
-    const message = `
-Name: ${data.name}
-Email: ${data.email}
-Project Type: ${data.projectType || 'Not specified'}
-
-Message:
-${data.message}
-    `;
+    const template = generateContactEmailTemplate(data);
 
     const mailOptions = {
-      from: `"${data.name}" <${process.env.MAIL_USER}>`,
+      from: `"Portfolio Contact" <${process.env.MAIL_USER}>`,
       to: process.env.MAIL_USER,
-      subject: `Portfolio Contact: ${data.subject}`,
-      text: message,
-      replyTo: data.email
+      replyTo: data.email,
+      subject: template.subject,
+      text: template.text,
+      html: template.html
     };
 
     const info = await transporter.sendMail(mailOptions);
