@@ -8,8 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink } from "lucide-react";
 import { SiDrupal } from "react-icons/si";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 
 interface ContactFormData {
   name: string;
@@ -29,17 +27,24 @@ export default function ContactSection() {
     projectType: "",
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      return apiRequest("POST", "/api/contact", {
-        name: data.name,
-        email: data.email,
-        subject: data.subject,
-        message: data.message,
-        projectType: data.projectType || undefined
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const formDataObj = new FormData();
+    formDataObj.append("entry.832518771", formData.name);
+    formDataObj.append("entry.1336921264", formData.email);
+    formDataObj.append("entry.224623651", formData.subject);
+    formDataObj.append("entry.1756018840", formData.message);
+    formDataObj.append("entry.2129877594", formData.projectType || "");
+
+    try {
+      const response = await fetch("https://docs.google.com/forms/d/e/1FAIpQLScexg_QQx5sehBH3vPBbLi7pEPryezi4XS8RloLfG2_dQroyQ/formResponse", {
+        method: "POST",
+        mode: "no-cors",
+        body: formDataObj,
       });
-    },
-    onSuccess: () => {
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you soon!",
@@ -51,28 +56,17 @@ export default function ContactSection() {
         message: "",
         projectType: "",
       });
-    },
-    onError: () => {
+    } catch (error) {
       toast({
         title: "Error",
         description: "Failed to send message. Please try again or contact me directly.",
         variant: "destructive",
       });
-    },
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
-      toast({
-        title: "Required Fields",
-        description: "Please fill in all required fields.",
-        variant: "destructive",
-      });
-      return;
+    } finally {
+      setIsSubmitting(false);
     }
-    contactMutation.mutate(formData);
   };
+
 
   const handleInputChange = (field: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -266,9 +260,9 @@ export default function ContactSection() {
                   <Button 
                     type="submit" 
                     className="w-full bg-primary hover:bg-primary/90 font-semibold py-4"
-                    disabled={contactMutation.isPending}
+                    disabled={isSubmitting}
                   >
-                    {contactMutation.isPending ? "Sending..." : "Send Message"}
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
               </CardContent>
