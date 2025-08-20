@@ -1,17 +1,13 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertContactSchema } from "@shared/schema";
-import { sendMail } from './services/mail';
-
 export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/contact", async (req, res) => {
     try {
       console.log('Received contact data:', req.body);
-      const contactData = insertContactSchema.parse(req.body);
-      console.log('Validated contact data:', contactData);
+  const contactData = req.body;
+  console.log('Received contact data (no validation):', contactData);
       
-      await sendMail(contactData);
+  // Email sending disabled
       res.json({ 
         success: true, 
         message: "Message sent successfully!" 
