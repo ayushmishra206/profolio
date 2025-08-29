@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Download, FileText } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const GOOGLE_DOC_ID = '1IvrdXyAMyVwRIprCViROXEEkI5x98SvRNirkh1NGaQY';
 
 export default function ResumeSection() {
+  const { toast } = useToast();
   const handleDownloadResume = async () => {
     try {
       // Replace GOOGLE_DOC_ID with your actual Google Doc ID
@@ -31,9 +33,8 @@ export default function ResumeSection() {
         description: "Resume downloaded successfully.",
       });
     } catch (error) {
-      console.error('Download failed:', error);
       toast({
-        title: "Download Failed",
+        title: "Download Failed", 
         description: "Unable to download resume. Please try again later.",
         variant: "destructive",
       });
