@@ -1,7 +1,20 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
+
+type Project = {
+  title: string;
+  summary: string;
+  highlights?: string[];
+  techStack: string[];
+  tags?: string[];
+  badge?: string;
+  links?: {
+    live?: string;
+    repo?: string;
+  };
+};
 
 export default function ProjectsSection() {
   const scrollToContact = () => {
@@ -15,81 +28,139 @@ export default function ProjectsSection() {
     }
   };
 
-  const featuredProjects = [
-    {
-      title: "CIWEM Membership Portal",
-      description: "Architected comprehensive membership portal with deep Drupal-CiviCRM integration, featuring member lifecycle management, event registration, and payment processing with real-time data synchronization.",
-      achievements: [
-        "Custom MySQL queries for optimized backend performance",
-        "Real-time CiviCRM data display using Drupal Views",
-        "Custom database structure for seamless data sync"
-      ],
-      techStack: ["Drupal 8/9", "CiviCRM", "MySQL", "PHP OOP", "Twig"],
-      tags: ["Drupal 9", "CiviCRM"],
-      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-      type: "Client Project"
-    },
-    {
-      title: "FEMS Unified Platform",
-      description: "Led technical development for Federation of European Microbiological Societies, integrating Drupal with CiviCRM for comprehensive membership, events, and scientific publication management with multilingual support.",
-      achievements: [
-        "Multilingual content management system",
-        "Scientific publication workflow automation",
-        "Dynamic Views connected to CiviCRM data"
-      ],
-      techStack: ["Drupal", "CiviCRM", "i18n", "Views"],
-      tags: ["Multilingual", "Scientific"],
-      image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-      type: "Federation Project"
-    },
-    {
-      title: "FOSFA Arbitration Portal",
-      description: "Engineered secure, Drupal-based digital platform for Federation of Oils, Seeds and Fats Associations to manage arbitration case submissions, tracking, and complete case lifecycle with robust security measures.",
-      achievements: [
-        "Role-based access controls and workflows",
-        "Custom modules for specialized case handling",
-        "External data systems integration"
-      ],
-      techStack: ["Drupal", "Custom Modules", "RBAC", "Workflows"],
-      tags: ["Secure", "Legal"],
-      image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-      type: "Federation Project"
-    },
+  const featuredProjects: Project[] = [
     {
       title: "Washington.org Migration",
-      description: "Executed complex Drupal 7 to Drupal 8 migration for high-traffic tourism platform (1M+ monthly visitors) with advanced MySQL optimization, caching strategies, and complete frontend redesign using Pattern Lab methodology.",
-      achievements: [
-        "Advanced MySQL query tuning and optimization",
-        "Varnish and Memcached implementation",
-        "Custom components with Pattern Lab"
+      summary: "Delivered a seamless Drupal 7 → 8 migration for Washington.org, keeping a 1M+ monthly visitor pipeline live while rebuilding the design system in Pattern Lab.",
+      highlights: [
+        "Optimized MySQL queries across legacy content imports",
+        "Introduced Varnish + Memcached caching layers for rapid responses",
+        "Redesigned UI components with reusable Pattern Lab atoms"
       ],
-      techStack: ["Drupal 7→8", "Varnish", "Memcached", "Pattern Lab"],
+      techStack: ["Drupal 7→8", "Pattern Lab", "MySQL", "Varnish", "Memcached"],
       tags: ["High Traffic", "Migration"],
-      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400",
-      type: "MMGY Global"
+      badge: "Enterprise Migration"
     }
   ];
 
-  const additionalProjects = [
+  const supportingProjects: Project[] = [
     {
       title: "Disability Rights UK",
-      description: "Full WCAG 2.1 AA compliance implementation with accessible Bootstrap theming, keyboard navigation, and comprehensive screen reader support.",
-      techStack: ["Accessibility", "Bootstrap", "WCAG"],
-      tag: "WCAG 2.1"
+      summary: "Implemented a fully accessible Drupal experience meeting WCAG 2.1 AA, including keyboard-friendly navigation and screen-reader semantics.",
+      techStack: ["Accessibility", "Drupal", "Bootstrap"],
+      tags: ["WCAG 2.1"],
+      badge: "Inclusive Design"
     },
     {
       title: "Intake Education Platform",
-      description: "High-performance backend handling 2000+ API responses, automated data sync for 1500+ nodes, and custom content ranking algorithms.",
-      techStack: ["REST API", "Cron Jobs", "Algorithms"],
-      tag: "Big Data"
+      summary: "Scaled content ingestion for 1500+ education programs with automated ranking rules while keeping API integrations lean and observable.",
+      techStack: ["REST APIs", "Cron Jobs", "Content Ranking"],
+      tags: ["Big Data"],
+      badge: "Data Ops"
     },
     {
       title: "Carers UK Portal",
-      description: "Comprehensive self-service portal with CiviCRM integration, enabling profile management and significantly reducing administrative overhead.",
-      techStack: ["Self-Service", "Workflows", "CiviCRM"],
-      tag: "Self-Service"
+      summary: "Built a CiviCRM-backed self-service portal so carers can manage membership details, reducing manual data entry for internal teams.",
+      techStack: ["CiviCRM", "Workflows", "Self-Service"],
+      tags: ["Portal"],
+      badge: "Member Experience"
     }
   ];
+
+  const personalProjects: Project[] = [
+    {
+      title: "SplitWisely",
+      summary: "Group expense sharing PWA that keeps roommates, friends, and travel buddies in sync with transparent balances and quick settlements.",
+      highlights: [
+        "Realtime Supabase security policies scoped to group membership",
+        "Expense and settlement flows powered by React Hook Form",
+        "Responsive, offline-friendly Vite build with Tailwind theming"
+      ],
+      techStack: ["React 18", "TypeScript", "Supabase", "Tailwind CSS", "Vite"],
+      tags: ["Side Project"],
+      badge: "Maker Lab",
+      links: {
+        live: "https://split.ayushmishra.com/",
+        repo: "https://github.com/ayushmishra206/splitwisely"
+      }
+    }
+  ];
+
+  const ProjectCard = ({ project }: { project: Project }) => {
+    const hasLinks = project.links && (project.links.live || project.links.repo);
+
+    return (
+      <Card className="h-full border border-slate-200 bg-white/80 backdrop-blur">
+        <CardHeader className="space-y-4">
+          <div className="flex flex-wrap items-center gap-2">
+            {project.badge && (
+              <Badge variant="outline" className="text-xs font-mono uppercase tracking-[0.08em]">
+                {project.badge}
+              </Badge>
+            )}
+            {project.tags?.map((tag) => (
+              <Badge key={tag} variant="secondary" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
+          </div>
+          <CardTitle className="text-2xl font-semibold text-slate-900">
+            {project.title}
+          </CardTitle>
+          <p className="text-slate-600 leading-relaxed">
+            {project.summary}
+          </p>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {project.highlights && project.highlights.length > 0 && (
+            <div>
+              <h4 className="font-semibold text-slate-900 mb-2">Highlights</h4>
+              <ul className="space-y-2 text-sm text-slate-600">
+                {project.highlights.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-primary">▹</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div>
+            <h4 className="font-semibold text-slate-900 mb-2">Stack</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <Badge key={tech} variant="outline" className="text-xs font-mono">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          {hasLinks && (
+            <div className="flex flex-wrap gap-3 pt-2">
+              {project.links?.live && (
+                <Button asChild>
+                  <a href={project.links.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2">
+                    Visit Live App
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+              {project.links?.repo && (
+                <Button asChild variant="outline">
+                  <a href={project.links.repo} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2">
+                    View Source
+                    <Github className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <section id="projects" className="py-20 bg-slate-50">
@@ -99,98 +170,73 @@ export default function ProjectsSection() {
             Featured <span className="text-primary">Projects</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            A showcase of complex Drupal implementations, CiviCRM integrations, 
-            and large-scale platform development projects.
+            A blend of high-impact client delivery and personal products, all built with a focus on reliability, accessibility, and fast iteration.
           </p>
         </div>
 
-        {/* Featured Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {featuredProjects.map((project, index) => (
-            <Card key={index} className="overflow-hidden group hover:shadow-xl transition-shadow duration-300">
-              <div className="relative">
-                <img 
-                  src={project.image} 
-                  alt={`${project.title} interface`}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+        <div className="space-y-16">
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <h3 className="text-2xl font-mono font-semibold text-slate-900">
+                  Maker Playground
+                </h3>
+                <p className="text-slate-600 max-w-2xl">
+                  Personal builds where I ship fast, iterate with users, and stress-test modern tooling in the wild.
+                </p>
               </div>
-              
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <CardTitle className="text-xl font-mono font-semibold text-slate-900">
-                    {project.title}
-                  </CardTitle>
-                  <div className="flex gap-2">
-                    {project.tags.map((tag, tagIndex) => (
-                      <Badge key={tagIndex} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </CardHeader>
+              <Badge variant="secondary" className="self-start sm:self-auto text-xs uppercase tracking-wide">
+                Always Shipping
+              </Badge>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {personalProjects.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+          </div>
 
-              <CardContent className="space-y-4">
-                <p className="text-slate-600 leading-relaxed">
-                  {project.description}
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <h3 className="text-2xl font-mono font-semibold text-slate-900">
+                  Supporting Impact
+                </h3>
+                <p className="text-slate-600 max-w-2xl">
+                  Targeted engagements where accessibility, data flow, and member experience were the core KPIs.
                 </p>
-                
-                <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Key Achievements:</h4>
-                  <ul className="text-sm text-slate-600 space-y-1">
-                    {project.achievements.map((achievement, achIndex) => (
-                      <li key={achIndex}>• {achievement}</li>
-                    ))}
-                  </ul>
-                </div>
+              </div>
+              <Badge variant="secondary" className="self-start sm:self-auto text-xs uppercase tracking-wide">
+                Delivery Notes
+              </Badge>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {supportingProjects.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+          </div>
 
-                <div>
-                  <h4 className="font-semibold text-slate-900 mb-2">Tech Stack:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline" className="text-xs font-mono">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="flex justify-between items-center pt-4">
-                  <span className="text-sm text-slate-500">{project.type}</span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Additional Projects */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {additionalProjects.map((project, index) => (
-            <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-mono font-semibold text-slate-900">{project.title}</h4>
-                  <Badge variant="secondary" className="text-xs">
-                    {project.tag}
-                  </Badge>
-                </div>
-                <p className="text-sm text-slate-600 mb-4">
-                  {project.description}
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+              <div>
+                <h3 className="text-2xl font-mono font-semibold text-slate-900">
+                  Featured Engagement
+                </h3>
+                <p className="text-slate-600 max-w-2xl">
+                  Enterprise delivery work that demanded scale, migration strategy, and a steady hand under traffic.
                 </p>
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {project.techStack.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="text-xs font-mono">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <button className="text-primary hover:text-primary/80 text-sm font-medium flex items-center">
-                  Learn More <ArrowRight className="ml-1 w-3 h-3" />
-                </button>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+              <Badge variant="secondary" className="self-start sm:self-auto text-xs uppercase tracking-wide">
+                Client Spotlight
+              </Badge>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {featuredProjects.map((project) => (
+                <ProjectCard key={project.title} project={project} />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Call to Action */}
