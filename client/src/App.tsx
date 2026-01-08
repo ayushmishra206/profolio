@@ -3,6 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
+import { useReferrerLogger } from "@/hooks/use-referrer-logger";
 
 function Router() {
   return (
@@ -14,6 +15,8 @@ function Router() {
 }
 
 function App() {
+  useReferrerLogger();
+
   return (
     <TooltipProvider>
       <Toaster />
