@@ -122,23 +122,6 @@ const projects: Project[] = [
 		metrics: [{ label: "Traffic served", value: "1M+/mo", icon: Layers }],
 	},
 	{
-		id: "civicrm-portal",
-		title: "Carers UK Member Portal",
-		tagline: "Self-service workflows for support networks.",
-		summary:
-			"Built a CiviCRM backed portal so carers can manage membership details and renewals without manual staff intervention.",
-		status: "Shipped",
-		filters: ["client"],
-		tech: ["CiviCRM", "Drupal", "Next.js", "Tailwind"],
-		highlights: [
-			"Segment-driven onboarding sequences dynamically tailor resources for new carers.",
-			"Accessible UI passes WCAG 2.1 AA with keyboard-first navigation safeguards.",
-			"Workflow automation trims a full-time-equivalent of manual data entry each quarter.",
-		],
-		tags: ["Accessibility", "Member Experience"],
-		metrics: [{ label: "Manual work saved", value: "1 FTE", icon: BarChart3 }],
-	},
-	{
 		id: "profolio-kit",
 		title: "Profolio UI Kit",
 		tagline: "Composable resume blocks for indie builders.",
