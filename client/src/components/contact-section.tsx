@@ -1,275 +1,254 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Mail, Phone, MapPin, Github, Linkedin, ExternalLink } from "lucide-react";
-import { SiDrupal } from "react-icons/si";
+import { useState, type CSSProperties } from "react";
+import SectionLabel from "@/components/section-label";
 import { useToast } from "@/hooks/use-toast";
 
-interface ContactFormData {
+interface FormData {
   name: string;
   email: string;
   subject: string;
   message: string;
-  projectType?: string;
+  type: string;
 }
+
+const SOCIALS = [
+  { label: "GitHub", handle: "@ayushmishra206", href: "https://github.com/ayushmishra206" },
+  { label: "LinkedIn", handle: "in/ayushmishra206", href: "https://linkedin.com/in/ayushmishra206" },
+  { label: "Drupal", handle: "u/ayushmishra206", href: "https://drupal.org/u/ayushmishra206" },
+  { label: "Email", handle: "ayushmishra206@gmail.com", href: "mailto:ayushmishra206@gmail.com" },
+];
+
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactSection() {
   const { toast } = useToast();
-  const [formData, setFormData] = useState<ContactFormData>({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    projectType: "",
-  });
+  const [form, setForm] = useState<FormData>({ name: "", email: "", subject: "", message: "", type: "" });
+  const [status, setStatus] = useState<Status>("idle");
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    const formDataObj = new FormData();
-    formDataObj.append("entry.832518771", formData.name);
-    formDataObj.append("entry.1336921264", formData.email);
-    formDataObj.append("entry.224623651", formData.subject);
-    formDataObj.append("entry.1756018840", formData.message);
-    formDataObj.append("entry.2129877594", formData.projectType || "");
-
+    setStatus("sending");
+    const body = new FormData();
+    body.append("entry.832518771", form.name);
+    body.append("entry.1336921264", form.email);
+    body.append("entry.224623651", form.subject);
+    body.append("entry.1756018840", form.message);
+    body.append("entry.2129877594", form.type || "");
     try {
-      const response = await fetch("https://docs.google.com/forms/d/e/1FAIpQLScexg_QQx5sehBH3vPBbLi7pEPryezi4XS8RloLfG2_dQroyQ/formResponse", {
-        method: "POST",
-        mode: "no-cors",
-        body: formDataObj,
-      });
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLScexg_QQx5sehBH3vPBbLi7pEPryezi4XS8RloLfG2_dQroyQ/formResponse",
+        { method: "POST", mode: "no-cors", body },
+      );
+      setStatus("sent");
+      setForm({ name: "", email: "", subject: "", message: "", type: "" });
       toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon!",
+        title: "Message sent",
+        description: "Thanks for reaching out — I'll be in touch soon.",
       });
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        projectType: "",
-      });
-    } catch (error) {
+    } catch {
+      setStatus("error");
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or contact me directly.",
+        title: "Didn't go through",
+        description: "Try emailing me directly at ayushmishra206@gmail.com.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
-
-  const handleInputChange = (field: keyof ContactFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const inputStyle: CSSProperties = {
+    width: "100%",
+    padding: "12px 0",
+    background: "transparent",
+    border: "none",
+    borderBottom: "1px solid var(--rule)",
+    fontFamily: "var(--sans)",
+    fontSize: 16,
+    color: "var(--ink)",
+    outline: "none",
+    transition: "border-color .2s ease",
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "ayushmishra206@gmail.com",
-      href: "mailto:ayushmishra206@gmail.com"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 9654782071",
-      href: "tel:+919654782071"
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "India (Remote Available)",
-      href: null
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: "GitHub Profile",
-      href: "https://github.com/ayushmishra206"
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://linkedin.com/in/ayushmishra206"
-    },
-    {
-      icon: SiDrupal,
-      label: "Drupal.org Profile",
-      href: "https://drupal.org/u/ayushmishra206"
-    }
-  ];
 
   return (
-    <section id="contact" className="py-20 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 mb-4">
-            Let's Work <span className="text-primary">Together</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Ready to discuss your next Drupal project or CiviCRM integration? 
-            I'm always excited to tackle complex challenges and deliver exceptional results.
-          </p>
-        </div>
+    <section
+      id="contact"
+      style={{ padding: "120px 0", borderTop: "1px solid var(--rule)", background: "var(--paper-2)" }}
+    >
+      <div className="container-p">
+        <SectionLabel num="§ 05" caption="The letters page">
+          Contact
+        </SectionLabel>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-6">
-            <Card className="shadow-md border border-slate-200">
-              <CardHeader>
-                <CardTitle className="text-lg font-mono text-slate-900">Get In Touch</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {contactInfo.map((info, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mr-3">
-                      <info.icon className="text-primary w-5 h-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-600">{info.label}</p>
-                      {info.href ? (
-                        <a 
-                          href={info.href}
-                          className="text-slate-900 font-medium hover:text-primary transition-colors"
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="text-slate-900 font-medium">{info.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+        <div
+          className="contact-grid"
+          style={{
+            marginTop: 72,
+            display: "grid",
+            gridTemplateColumns: "1fr 1.3fr",
+            gap: "clamp(40px, 6vw, 100px)",
+          }}
+        >
+          <div>
+            <p
+              className="serif"
+              style={{ margin: 0, fontSize: 24, lineHeight: 1.4, fontWeight: 300, textWrap: "pretty" }}
+            >
+              Ready to discuss a Drupal build, CRM integration, or a migration that's been kicked down the road? I read
+              every message, and I don't ghost.
+            </p>
 
-            {/* Social Links */}
-            <Card className="shadow-md border border-slate-200">
-              <CardHeader>
-                <CardTitle className="text-lg font-mono text-slate-900">Connect Online</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                {socialLinks.map((link, index) => (
-                  <a 
-                    key={index}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center p-3 rounded-lg hover:bg-slate-50 transition-colors group"
-                  >
-                    <link.icon className="text-xl text-slate-600 group-hover:text-primary mr-3" />
-                    <span className="text-slate-700 group-hover:text-primary">{link.label}</span>
-                    <ExternalLink className="text-xs text-slate-400 ml-auto w-3 h-3" />
-                  </a>
-                ))}
-              </CardContent>
-            </Card>
+            <div style={{ marginTop: 40, borderTop: "1px solid var(--ink)" }}>
+              {SOCIALS.map((s, i) => (
+                <a
+                  key={i}
+                  href={s.href}
+                  target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noreferrer"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "120px 1fr auto",
+                    alignItems: "baseline",
+                    padding: "18px 0",
+                    borderBottom: "1px solid var(--rule)",
+                    transition: "color .2s ease",
+                  }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--accent)")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "")}
+                >
+                  <span className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                    {s.label}
+                  </span>
+                  <span className="serif" style={{ fontStyle: "italic", fontSize: 19 }}>
+                    {s.handle}
+                  </span>
+                  <span className="mono" style={{ fontSize: 12, color: "var(--ink-faint)" }}>
+                    ↗
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            <div style={{ marginTop: 40 }}>
+              <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 6 }}>
+                Based
+              </div>
+              <div className="serif" style={{ fontSize: 20 }}>
+                Jaipur, India · remote worldwide
+              </div>
+            </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-md border border-slate-200">
-              <CardHeader>
-                <CardTitle className="text-xl font-mono text-slate-900">Send a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => handleInputChange("name", e.target.value)}
-                        placeholder="Your full name"
-                        className="mt-1"
-                      />
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        placeholder="your.email@example.com"
-                        className="mt-1"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="subject">Subject *</Label>
-                    <Input
-                      id="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={(e) => handleInputChange("subject", e.target.value)}
-                      placeholder="What's this about?"
-                      className="mt-1"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="message">Message *</Label>
-                    <Textarea
-                      id="message"
-                      required
-                      rows={6}
-                      value={formData.message}
-                      onChange={(e) => handleInputChange("message", e.target.value)}
-                      placeholder="Tell me about your project, requirements, or just say hello..."
-                      className="mt-1 resize-none"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="project-type">Project Type (Optional)</Label>
-                    <Select value={formData.projectType} onValueChange={(value) => handleInputChange("projectType", value)}>
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Select project type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="drupal-development">Drupal Development</SelectItem>
-                        <SelectItem value="civicrm-integration">CiviCRM Integration</SelectItem>
-                        <SelectItem value="site-migration">Site Migration</SelectItem>
-                        <SelectItem value="performance-optimization">Performance Optimization</SelectItem>
-                        <SelectItem value="consultation">Technical Consultation</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90 font-semibold py-4"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+          <form onSubmit={submit}>
+            <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 20 }}>
+              Send a letter
+            </div>
+
+            <div className="form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 28 }}>
+              <label>
+                <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
+                  Name
+                </div>
+                <input
+                  required
+                  style={inputStyle}
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  onFocus={(e) => (e.target.style.borderBottomColor = "var(--ink)")}
+                  onBlur={(e) => (e.target.style.borderBottomColor = "var(--rule)")}
+                />
+              </label>
+              <label>
+                <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
+                  Email
+                </div>
+                <input
+                  required
+                  type="email"
+                  style={inputStyle}
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  onFocus={(e) => (e.target.style.borderBottomColor = "var(--ink)")}
+                  onBlur={(e) => (e.target.style.borderBottomColor = "var(--rule)")}
+                />
+              </label>
+            </div>
+
+            <label style={{ display: "block", marginTop: 28 }}>
+              <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
+                Subject
+              </div>
+              <input
+                required
+                style={inputStyle}
+                value={form.subject}
+                onChange={(e) => setForm({ ...form, subject: e.target.value })}
+                onFocus={(e) => (e.target.style.borderBottomColor = "var(--ink)")}
+                onBlur={(e) => (e.target.style.borderBottomColor = "var(--rule)")}
+              />
+            </label>
+
+            <label style={{ display: "block", marginTop: 28 }}>
+              <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
+                Project type
+              </div>
+              <select
+                style={{ ...inputStyle, appearance: "none", paddingRight: 20 }}
+                value={form.type}
+                onChange={(e) => setForm({ ...form, type: e.target.value })}
+              >
+                <option value="">Select one (optional)</option>
+                <option value="drupal">Drupal development</option>
+                <option value="civicrm">CiviCRM integration</option>
+                <option value="migration">Site migration</option>
+                <option value="performance">Performance optimization</option>
+                <option value="consult">Technical consultation</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+
+            <label style={{ display: "block", marginTop: 28 }}>
+              <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
+                Message
+              </div>
+              <textarea
+                required
+                rows={5}
+                style={{ ...inputStyle, resize: "vertical", lineHeight: 1.5 }}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                onFocus={(e) => (e.target.style.borderBottomColor = "var(--ink)")}
+                onBlur={(e) => (e.target.style.borderBottomColor = "var(--rule)")}
+              />
+            </label>
+
+            <div style={{ marginTop: 36, display: "flex", gap: 14, alignItems: "center", flexWrap: "wrap" }}>
+              <button className="btn-p" type="submit" disabled={status === "sending"}>
+                {status === "sending" ? "Sending…" : status === "sent" ? "Sent ✓" : "Send message"}
+              </button>
+              <span
+                className="mono caps"
+                style={{
+                  color:
+                    status === "sent"
+                      ? "var(--sage)"
+                      : status === "error"
+                        ? "var(--accent)"
+                        : "var(--ink-faint)",
+                }}
+              >
+                {status === "sent" && "Thanks — I'll be in touch soon"}
+                {status === "error" && "Didn't go through — try email?"}
+                {status === "idle" && "Or just email directly"}
+                {status === "sending" && "One moment…"}
+              </span>
+            </div>
+          </form>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .contact-grid, .form-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

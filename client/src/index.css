@@ -3,123 +3,203 @@
 @tailwind utilities;
 
 :root {
-  --background: 240 10% 98%;
-  --foreground: 224 71% 4%;
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 9% 46%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 224 71% 4%;
-  --card: 0 0% 100%;
-  --card-foreground: 224 71% 4%;
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --primary: 221 83% 53%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 220 14% 96%;
-  --secondary-foreground: 220 9% 9%;
-  --accent: 220 14% 96%;
-  --accent-foreground: 220 9% 9%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 221 83% 53%;
-  --radius: 0.5rem;
+  /* Warm-minimal, print-inspired palette */
+  --paper: #F3EEE5;
+  --paper-2: #EBE4D7;
+  --ink: #1A1815;
+  --ink-soft: #5A544B;
+  --ink-faint: #8A8378;
+  --rule: #D9D1C2;
+  --accent: oklch(0.58 0.10 40);
+  --accent-soft: oklch(0.92 0.03 55);
+  --sage: oklch(0.55 0.05 145);
+
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --maxw: 1280px;
+  --gutter: clamp(20px, 4vw, 56px);
+
+  /* shadcn token shims (kept for the UI primitives that still reference them) */
+  --background: 40 30% 93%;
+  --foreground: 30 10% 10%;
+  --muted: 36 22% 87%;
+  --muted-foreground: 30 9% 35%;
+  --popover: 40 30% 93%;
+  --popover-foreground: 30 10% 10%;
+  --card: 40 30% 93%;
+  --card-foreground: 30 10% 10%;
+  --border: 36 24% 80%;
+  --input: 36 24% 80%;
+  --primary: 30 10% 10%;
+  --primary-foreground: 40 30% 93%;
+  --secondary: 36 22% 87%;
+  --secondary-foreground: 30 10% 10%;
+  --accent-foreground: 30 10% 10%;
+  --destructive: 0 60% 45%;
+  --destructive-foreground: 40 30% 93%;
+  --ring: 30 10% 10%;
+  --radius: 0;
 }
 
-.dark {
-  --background: 224 71% 4%;
-  --foreground: 210 40% 98%;
-  --muted: 223 47% 11%;
-  --muted-foreground: 215 20% 65%;
-  --popover: 224 71% 4%;
-  --popover-foreground: 210 40% 98%;
-  --card: 224 71% 4%;
-  --card-foreground: 210 40% 98%;
-  --border: 223 47% 11%;
-  --input: 223 47% 11%;
-  --primary: 221 83% 53%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 223 47% 11%;
-  --secondary-foreground: 210 40% 98%;
-  --accent: 223 47% 11%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 63% 31%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 221 83% 53%;
+* {
+  box-sizing: border-box;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Grain overlay — gives the paper feel */
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    radial-gradient(rgba(26, 24, 21, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(26, 24, 21, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+#root {
+  position: relative;
+  z-index: 2;
+}
+
+.mono {
+  font-family: var(--mono);
+  letter-spacing: 0.02em;
+}
+
+.serif {
+  font-family: var(--serif);
+}
+
+.caps {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+}
+
+.hr {
+  height: 1px;
+  background: var(--rule);
+  border: 0;
+}
+
+.hr-ink {
+  height: 1px;
+  background: var(--ink);
+  border: 0;
+}
+
+.container-p {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+section {
+  scroll-margin-top: 96px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn-p {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.btn-p:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
+.btn-p.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-p.ghost:hover {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.link-u {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.link-u:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 760px) {
   body {
-    @apply font-sans antialiased bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .font-code {
-    font-family: 'Source Code Pro', monospace;
+    font-size: 15px;
   }
 }
 
 @layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.8s ease-out;
-  }
-
-  .animate-typing {
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-  }
-
-  @keyframes fadeIn {
-    0% {
+  @keyframes projFade {
+    from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(6px);
     }
-    100% {
+
+    to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes slideUp {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes typing {
-    0% {
-      width: 0;
-    }
-    100% {
-      width: 100%;
-    }
-  }
-
-  @keyframes blink-caret {
-    0%, 50% {
-      border-color: transparent;
-    }
-    51%, 100% {
-      border-color: hsl(var(--primary));
     }
   }
 }

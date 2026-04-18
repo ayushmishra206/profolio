@@ -1,180 +1,183 @@
-import { CheckCircle, Code, Star, Award } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import SectionLabel from "@/components/section-label";
+
+interface Experience {
+  role: string;
+  org: string;
+  place: string;
+  period: string;
+  current: boolean;
+  blurb: string;
+  lines: string[];
+  stack: string[];
+}
+
+const EXPERIENCE: Experience[] = [
+  {
+    role: "Drupal Engineer, L2",
+    org: "Compuco",
+    place: "Remote",
+    period: "Apr 2022 — present",
+    current: true,
+    blurb:
+      "Technical lead on complex Drupal + CiviCRM builds. I own the architecture on 5+ concurrent projects and keep releases boring in the best way.",
+    lines: [
+      "Shipped with zero critical post-launch issues across the current slate.",
+      "Rewrote the team's documentation playbook — clarification loops shrank by ~15%.",
+      "Standardised module deployment and CiviCRM update cadence across projects.",
+      "Cut average project delay by 10% through earlier-stage scoping calls.",
+    ],
+    stack: ["Drupal 8/9/10", "CiviCRM", "PHP", "Architecture"],
+  },
+  {
+    role: "Software Developer",
+    org: "OpenSense Labs",
+    place: "Remote",
+    period: "Oct 2020 — Mar 2022",
+    current: false,
+    blurb:
+      "Large-scale Drupal work for tourism, civic tech, and education — plus the open-source contributions that helped put the company in the top three global Drupal shops.",
+    lines: [
+      "Shepherded Washington.org's migration at 1M+ monthly visitors without SEO attrition.",
+      "Built an intake/education platform with 2000+ live API responses.",
+      "Authored automated cron jobs managing 1500+ Drupal nodes.",
+      "Mentored two junior devs on module development and review discipline.",
+    ],
+    stack: ["Drupal 7/8", "REST APIs", "Migrations", "Mentorship"],
+  },
+  {
+    role: "GSoC Mentor",
+    org: "Drupal Association · Google Summer of Code",
+    place: "",
+    period: "May — Sep 2024",
+    current: false,
+    blurb:
+      "Mentored student contributors through their first real open-source cycle — scoping, reviewing, unblocking, and occasionally shipping with them.",
+    lines: [
+      "Full-cycle mentorship from proposal through final submission.",
+      "Completion certificate awarded by the Drupal Association.",
+    ],
+    stack: ["Mentorship", "Open source", "Community"],
+  },
+];
 
 export default function ExperienceSection() {
-  const experiences = [
-    {
-      title: "Drupal Engineer (L2)",
-      company: "Compuco",
-      location: "Remote",
-      period: "Apr 2022 – Present",
-      current: true,
-      description: "Leading technical architecture and development for complex Drupal and CiviCRM solutions, managing multiple concurrent projects and driving technical excellence across development teams.",
-      achievements: [
-        "Managed 5+ concurrent Drupal projects with complex CiviCRM integrations",
-        'Ensured code quality; zero critical QA issues, cut delays 10%.',
-        'Enhanced documentation, reducing issue clarification time by 15%.',
-        "Achieved zero critical post-launch QA issues",
-        "Reduced project delays by 10% through proactive problem-solving"
-      ],
-      responsibilities: [
-        "Complex CiviCRM integrations for membership and fundraising",
-        "Technical documentation standardization (15% efficiency gain)",
-        "Module deployments and CiviCRM update management",
-        "Performance optimization and scalability implementation"
-      ],
-      technologies: ["Drupal 8/9/10", "CiviCRM", "Team Leadership", "Technical Architecture"]
-    },
-    {
-      title: "Software Developer",
-      company: "Opensense Labs",
-      location: "Remote",
-      period: "Oct 2020 - Mar 2022",
-      current: false,
-      description: "Specialized in large-scale Drupal development, open-source contributions, and mentoring junior developers while contributing to company's recognition as a top 3 global Drupal services provider.",
-      achievements: [
-        "50+ Drupal core issue patches and contributions",
-        "Led complex multisite Drupal project with REST API integration",
-        "Mentored 2 junior developers in advanced Drupal techniques",
-        "Contributed to company's top 3 global marketplace ranking"
-      ],
-      responsibilities: [
-        "Washington.org migration (1M+ monthly visitors)",
-        "Intake Education platform with 2000+ API responses",
-        "Automated cron jobs for 1500+ Drupal nodes",
-        "Dynamic content ranking system development"
-      ],
-      technologies: ["Drupal 7/8", "Open Source", "REST APIs", "Mentoring"]
-    }
-  ];
-
-  const mentorship = {
-    title: "GSoC Mentor",
-    organization: "Drupal Association • Google Summer of Code",
-    period: "May 2024 - Sep 2024",
-    description: "Mentored student contributors on Drupal projects, providing technical guidance, code reviews, and support to help them complete their projects and contribute to the Drupal ecosystem. Received completion certificate.",
-    technologies: ["Mentorship", "Open Source", "Google", "Community"]
-  };
-
   return (
-    <section id="experience" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 mb-4">
-            Professional <span className="text-primary">Experience</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            A journey of continuous growth, technical leadership, and impactful contributions 
-            to complex web development projects.
-          </p>
-        </div>
+    <section id="work" style={{ padding: "120px 0", borderTop: "1px solid var(--rule)" }}>
+      <div className="container-p">
+        <SectionLabel num="§ 01" caption="Four years, two companies, one thesis">
+          Work
+        </SectionLabel>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-primary/20"></div>
-          
-          <div className="space-y-12">
-            {/* Current Position */}
-            {experiences.map((experience, index) => (
-              <div key={index} className="relative flex items-start">
-                <div className={`absolute left-6 w-4 h-4 rounded-full border-4 border-white shadow-lg ${
-                  experience.current ? 'bg-primary' : 'bg-slate-400'
-                }`}></div>
-                <div className="ml-20">
-                  <div className={`p-8 rounded-xl border ${
-                    experience.current 
-                      ? 'bg-gradient-to-r from-primary/5 to-blue-50 border-primary/10' 
-                      : 'bg-slate-50 border-slate-200'
-                  }`}>
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-mono font-semibold text-slate-900">{experience.title}</h3>
-                        <p className={`font-medium ${experience.current ? 'text-primary' : 'text-slate-600'}`}>
-                          {experience.company} • {experience.location}
-                        </p>
-                      </div>
-                      <div className="text-slate-600 font-medium">{experience.period}</div>
-                    </div>
-                    
-                    <p className="text-slate-700 mb-6 leading-relaxed">
-                      {experience.description}
-                    </p>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                      <div>
-                        <h4 className="font-semibold text-slate-900 mb-3">Key Achievements</h4>
-                        <ul className="space-y-2 text-sm text-slate-700">
-                          {experience.achievements.map((achievement, achIndex) => (
-                            <li key={achIndex} className="flex items-start">
-                              <CheckCircle className={`mt-1 mr-2 flex-shrink-0 w-4 h-4 ${
-                                experience.current ? 'text-green-600' : 'text-yellow-500'
-                              }`} />
-                              <span>{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-slate-900 mb-3">Technical Responsibilities</h4>
-                        <ul className="space-y-2 text-sm text-slate-700">
-                          {experience.responsibilities.map((responsibility, respIndex) => (
-                            <li key={respIndex} className="flex items-start">
-                              <Code className={`mt-1 mr-2 flex-shrink-0 w-4 h-4 ${
-                                experience.current ? 'text-primary' : 'text-blue-600'
-                              }`} />
-                              <span>{responsibility}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {experience.technologies.map((tech, techIndex) => (
-                        <Badge 
-                          key={techIndex} 
-                          variant={experience.current ? "default" : "secondary"}
-                          className="text-sm font-medium"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
+        <div style={{ marginTop: 80 }}>
+          {EXPERIENCE.map((e, idx) => (
+            <article
+              key={idx}
+              className="work-row"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "160px 1fr",
+                gap: "clamp(24px, 5vw, 80px)",
+                padding: "48px 0",
+                borderTop: "1px solid var(--ink)",
+                borderBottom: idx === EXPERIENCE.length - 1 ? "1px solid var(--ink)" : "none",
+              }}
+            >
+              <div>
+                <div
+                  className="mono caps"
+                  style={{ color: e.current ? "var(--accent)" : "var(--ink-soft)", marginBottom: 6 }}
+                >
+                  {e.current ? "● Now" : "○ Prior"}
+                </div>
+                <div className="mono" style={{ fontSize: 13, color: "var(--ink)" }}>
+                  {e.period}
+                </div>
+                {e.place && (
+                  <div className="mono" style={{ fontSize: 12, color: "var(--ink-faint)", marginTop: 4 }}>
+                    {e.place}
                   </div>
+                )}
+              </div>
+
+              <div>
+                <h3
+                  className="serif"
+                  style={{
+                    margin: 0,
+                    fontSize: "clamp(28px, 3.2vw, 42px)",
+                    fontWeight: 300,
+                    letterSpacing: "-0.01em",
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {e.role}
+                  <span style={{ fontStyle: "italic", color: "var(--ink-soft)" }}> — {e.org}</span>
+                </h3>
+                <p
+                  className="serif"
+                  style={{
+                    marginTop: 18,
+                    fontSize: 19,
+                    lineHeight: 1.55,
+                    maxWidth: "62ch",
+                    textWrap: "pretty",
+                  }}
+                >
+                  {e.blurb}
+                </p>
+
+                <ul style={{ margin: "24px 0 0", padding: 0, listStyle: "none" }}>
+                  {e.lines.map((l, i) => (
+                    <li
+                      key={i}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "28px 1fr",
+                        alignItems: "baseline",
+                        padding: "10px 0",
+                        borderTop: "1px dotted var(--rule)",
+                        fontSize: 15,
+                        lineHeight: 1.55,
+                        color: "var(--ink)",
+                      }}
+                    >
+                      <span className="mono" style={{ color: "var(--accent)", fontSize: 12 }}>
+                        →
+                      </span>
+                      <span style={{ textWrap: "pretty" }}>{l}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div style={{ marginTop: 24, display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {e.stack.map((s, i) => (
+                    <span
+                      key={i}
+                      className="mono"
+                      style={{
+                        fontSize: 11,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        padding: "6px 10px",
+                        border: "1px solid var(--rule)",
+                        color: "var(--ink-soft)",
+                        background: "var(--paper-2)",
+                      }}
+                    >
+                      {s}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-
-            {/* Mentorship */}
-            <div className="relative flex items-start">
-              <div className="absolute left-6 w-4 h-4 bg-green-500 rounded-full border-4 border-white shadow-lg"></div>
-              <div className="ml-20">
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded-xl border border-green-100">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-mono font-semibold text-slate-900">{mentorship.title}</h3>
-                      <p className="text-green-600 font-medium">{mentorship.organization}</p>
-                    </div>
-                    <div className="text-slate-600 font-medium">{mentorship.period}</div>
-                  </div>
-                  
-                  <p className="text-slate-700 mb-4 leading-relaxed">
-                    {mentorship.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2">
-                    {mentorship.technologies.map((tech, index) => (
-                      <Badge key={index} className="bg-green-100 text-green-800 text-sm font-medium">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 760px) {
+          .work-row { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }

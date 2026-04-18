@@ -1,238 +1,219 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { SiDrupal } from "react-icons/si";
-import { Users, Code, Settings, Brain, GraduationCap, Award } from "lucide-react";
+import SectionLabel from "@/components/section-label";
+
+type Level = "Expert" | "Advanced";
+
+interface SkillGroup {
+  title: string;
+  caption: string;
+  items: Array<[string, Level]>;
+}
+
+const SKILL_GROUPS: SkillGroup[] = [
+  {
+    title: "Drupal",
+    caption: "Versions 7 – 10 · 50+ core patches",
+    items: [
+      ["Site building & information architecture", "Expert"],
+      ["Custom module development (OOP PHP)", "Expert"],
+      ["Twig theming & Render API", "Advanced"],
+      ["Performance tuning & headless Drupal", "Advanced"],
+      ["Migrate API, multisite, config mgmt", "Advanced"],
+    ],
+  },
+  {
+    title: "CiviCRM",
+    caption: "Deep integration specialist",
+    items: [
+      ["Configuration & customization", "Expert"],
+      ["Drupal integration (Entity, Webform)", "Expert"],
+      ["Membership & event management", "Advanced"],
+      ["API development & data I/O", "Advanced"],
+      ["CiviRules, Case Management", "Advanced"],
+    ],
+  },
+  {
+    title: "Stack",
+    caption: "What I reach for",
+    items: [
+      ["PHP (OOP)", "Expert"],
+      ["MySQL", "Advanced"],
+      ["JavaScript (ES6+)", "Advanced"],
+      ["HTML / CSS", "Expert"],
+      ["REST · GraphQL", "Advanced"],
+    ],
+  },
+  {
+    title: "Tools & ways",
+    caption: "How the work actually gets done",
+    items: [
+      ["Git, Bitbucket, PR discipline", "Expert"],
+      ["Linux environments", "Advanced"],
+      ["JIRA, Agile/Scrum rituals", "Advanced"],
+      ["Drush, Composer, Platform.sh", "Advanced"],
+      ["Technical leadership & mentoring", "Advanced"],
+    ],
+  },
+];
+
+const EDUCATION = [
+  {
+    degree: "MCA — Master of Computer Applications",
+    school: "Chandigarh University (Online)",
+    period: "2021 – 2023",
+    grade: "8.0 GPA",
+  },
+  {
+    degree: "BCA — Bachelor of Computer Applications",
+    school: "Manipal University Jaipur",
+    period: "2017 – 2020",
+    grade: "8.5 GPA",
+  },
+];
 
 export default function SkillsSection() {
-  const drupalSkills = [
-    { name: "Site Building & Architecture", level: 95, expertise: "Expert" },
-    { name: "Custom Module Development (OOP PHP)", level: 90, expertise: "Expert" },
-    { name: "Theming (Twig) & API Mastery", level: 88, expertise: "Advanced" },
-    { name: "Performance Tuning & Headless", level: 85, expertise: "Advanced" },
-  ];
-
-  const civicrmSkills = [
-    { name: "Configuration & Customization", level: 92, expertise: "Expert" },
-    { name: "Drupal Integration (Entity, Webform)", level: 90, expertise: "Expert" },
-    { name: "Membership & Event Management", level: 88, expertise: "Advanced" },
-    { name: "API Development & Data I/O", level: 85, expertise: "Advanced" },
-  ];
-
-  const webSkills = [
-    { name: "PHP (OOP)", expertise: "Expert" },
-    { name: "MySQL", expertise: "Advanced" },
-    { name: "JavaScript (ES6+)", expertise: "Advanced" },
-    { name: "HTML5/CSS3", expertise: "Expert" },
-    { name: "RESTful APIs", expertise: "Advanced" },
-  ];
-
-  const devTools = [
-    { name: "Git/Bitbucket", expertise: "Expert" },
-    { name: "JIRA", expertise: "Advanced" },
-    { name: "Linux Environment", expertise: "Advanced" },
-    { name: "Postman", expertise: "Advanced" },
-    { name: "Agile/Scrum", expertise: "Proficient" },
-  ];
-
-  const softSkills = [
-    "Analytical Thinking",
-    "Technical Leadership", 
-    "Problem Solving",
-    "Mentoring & Training",
-    "Adaptability"
-  ];
-
   return (
-    <section id="skills" className="py-20 bg-slate-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 mb-4">
-            Technical <span className="text-primary">Skills</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Comprehensive expertise across the full development stack, with deep specialization 
-            in Drupal ecosystem and modern web technologies.
-          </p>
-        </div>
+    <section id="skills" style={{ padding: "120px 0", borderTop: "1px solid var(--rule)" }}>
+      <div className="container-p">
+        <SectionLabel num="§ 04" caption="What I reach for, and how often">
+          Craft
+        </SectionLabel>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Drupal Expertise */}
-          <Card className="shadow-lg border border-slate-200">
-            <CardHeader>
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <SiDrupal className="text-2xl text-blue-600" />
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-mono text-slate-900">Drupal Expertise</CardTitle>
-                  <p className="text-slate-600">Versions 7-10 • 50+ Core Contributions</p>
-                </div>
+        <div
+          className="skills-grid"
+          style={{
+            marginTop: 72,
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 0,
+            border: "1px solid var(--ink)",
+          }}
+        >
+          {SKILL_GROUPS.map((g, gi) => (
+            <div
+              key={gi}
+              style={{
+                padding: "28px 28px 32px",
+                borderRight: gi % 2 === 0 ? "1px solid var(--ink)" : "none",
+                borderBottom: gi < 2 ? "1px solid var(--ink)" : "none",
+                background: gi === 0 ? "var(--paper-2)" : "var(--paper)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "baseline",
+                  marginBottom: 20,
+                }}
+              >
+                <h3
+                  className="serif"
+                  style={{ margin: 0, fontSize: 32, fontWeight: 300, fontStyle: "italic" }}
+                >
+                  {g.title}
+                </h3>
+                <span className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                  {String(gi + 1).padStart(2, "0")}/0{SKILL_GROUPS.length}
+                </span>
               </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {drupalSkills.map((skill, index) => (
-                <div key={index}>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium text-slate-900">{skill.name}</span>
-                    <span className="text-sm text-slate-600 font-mono">{skill.expertise}</span>
-                  </div>
-                  <Progress value={skill.level} className="h-2" />
-                </div>
-              ))}
-              
-              <div className="pt-6 border-t border-slate-200">
-                <h4 className="font-semibold text-slate-900 mb-3">Key Tools & Platforms</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Drush", "Composer", "Acquia Cloud", "Platform.sh"].map((tool, index) => (
-                    <Badge key={index} className="bg-blue-100 text-blue-800">
-                      {tool}
-                    </Badge>
-                  ))}
-                </div>
+              <div className="mono" style={{ fontSize: 12, color: "var(--ink-soft)", marginBottom: 16 }}>
+                {g.caption}
               </div>
-            </CardContent>
-          </Card>
 
-          {/* CiviCRM & Integration */}
-          <Card className="shadow-lg border border-slate-200">
-            <CardHeader>
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                  <Users className="text-2xl text-green-600" />
-                </div>
-                <div>
-                  <CardTitle className="text-xl font-mono text-slate-900">CiviCRM & Integration</CardTitle>
-                  <p className="text-slate-600">Deep Integration Specialist</p>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {civicrmSkills.map((skill, index) => (
-                <div key={index}>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-medium text-slate-900">{skill.name}</span>
-                    <span className="text-sm text-slate-600 font-mono">{skill.expertise}</span>
-                  </div>
-                  <Progress value={skill.level} className="h-2" />
-                </div>
-              ))}
-              
-              <div className="pt-6 border-t border-slate-200">
-                <h4 className="font-semibold text-slate-900 mb-3">Key Modules</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Membership", "Events", "Case Management", "CiviRules"].map((module, index) => (
-                    <Badge key={index} className="bg-green-100 text-green-800">
-                      {module}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Additional Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {/* Web Technologies */}
-          <Card className="shadow-md border border-slate-200">
-            <CardContent className="p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
-                  <Code className="text-lg text-purple-600" />
-                </div>
-                <h3 className="text-lg font-mono font-semibold text-slate-900">Web Stack</h3>
-              </div>
-              <div className="space-y-3">
-                {webSkills.map((skill, index) => (
-                  <div key={index} className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-slate-700">{skill.name}</span>
-                    <span className="text-xs text-slate-500 font-mono">{skill.expertise}</span>
-                  </div>
+              <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
+                {g.items.map(([name, level], i) => (
+                  <li
+                    key={i}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr auto",
+                      alignItems: "baseline",
+                      padding: "12px 0",
+                      borderTop: "1px dotted var(--rule)",
+                      fontSize: 15,
+                    }}
+                  >
+                    <span>{name}</span>
+                    <span
+                      className="mono caps"
+                      style={{
+                        fontSize: 10,
+                        color: level === "Expert" ? "var(--accent)" : "var(--ink-soft)",
+                      }}
+                    >
+                      {level}
+                    </span>
+                  </li>
                 ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Development Tools */}
-          <Card className="shadow-md border border-slate-200">
-            <CardContent className="p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center mr-3">
-                  <Settings className="text-lg text-orange-600" />
-                </div>
-                <h3 className="text-lg font-mono font-semibold text-slate-900">Dev Tools</h3>
-              </div>
-              <div className="space-y-3">
-                {devTools.map((tool, index) => (
-                  <div key={index} className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-slate-700">{tool.name}</span>
-                    <span className="text-xs text-slate-500 font-mono">{tool.expertise}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Soft Skills */}
-          <Card className="shadow-md border border-slate-200">
-            <CardContent className="p-6">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
-                  <Brain className="text-lg text-indigo-600" />
-                </div>
-                <h3 className="text-lg font-mono font-semibold text-slate-900">Soft Skills</h3>
-              </div>
-              <div className="space-y-3">
-                {softSkills.map((skill, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    <span className="text-sm text-slate-700">{skill}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Education & Certifications */}
-        <Card className="shadow-lg border border-slate-200">
-          <CardContent className="p-8">
-            <h3 className="text-xl font-mono font-semibold text-slate-900 mb-6 text-center">
-              Education & Certifications
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="text-2xl text-blue-600" />
-                </div>
-                <h4 className="font-semibold text-slate-900 mb-2">Bachelor of Computer Applications</h4>
-                <p className="text-slate-600 mb-1">Manipal University Jaipur</p>
-                <p className="text-sm text-slate-500">8.5 GPA • 2017-2020</p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <GraduationCap className="text-2xl text-blue-600" />
-                </div>
-                <h4 className="font-semibold text-slate-900 mb-2">Master of Computer Applications</h4>
-                <p className="text-slate-600 mb-1">Chandigarh University (Online)</p>
-                <p className="text-sm text-slate-500">8.0 GPA • 2021-2023</p>
-              </div>
+              </ul>
             </div>
-            
-            <div className="mt-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="text-2xl text-green-600" />
+          ))}
+        </div>
+
+        <div style={{ marginTop: 72 }}>
+          <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 16 }}>
+            Schooling & certs
+          </div>
+          <div style={{ borderTop: "1px solid var(--ink)" }}>
+            {EDUCATION.map((ed, i) => (
+              <div
+                key={i}
+                className="edu-row"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "auto 1fr auto",
+                  gap: 24,
+                  alignItems: "baseline",
+                  padding: "22px 0",
+                  borderBottom: "1px solid var(--rule)",
+                }}
+              >
+                <span className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                  {ed.period}
+                </span>
+                <span className="serif" style={{ fontSize: 22, lineHeight: 1.3 }}>
+                  {ed.degree}
+                  <span style={{ color: "var(--ink-soft)", fontStyle: "italic" }}> — {ed.school}</span>
+                </span>
+                <span className="mono caps" style={{ color: "var(--accent)" }}>
+                  {ed.grade}
+                </span>
               </div>
-              <h4 className="font-semibold text-slate-900 mb-2">Google Summer of Code</h4>
-              <p className="text-slate-600 mb-1">Mentor Certification</p>
-              <p className="text-sm text-slate-500">Drupal Association • 2024</p>
+            ))}
+            <div
+              className="edu-row"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "auto 1fr auto",
+                gap: 24,
+                alignItems: "baseline",
+                padding: "22px 0",
+                borderBottom: "1px solid var(--ink)",
+              }}
+            >
+              <span className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                2024
+              </span>
+              <span className="serif" style={{ fontSize: 22, lineHeight: 1.3 }}>
+                GSoC Mentor Certification
+                <span style={{ color: "var(--ink-soft)", fontStyle: "italic" }}> — Drupal Association</span>
+              </span>
+              <span className="mono caps" style={{ color: "var(--accent)" }}>
+                Completion
+              </span>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
+
+      <style>{`
+        @media (max-width: 760px) {
+          .skills-grid { grid-template-columns: 1fr !important; }
+          .skills-grid > div { border-right: none !important; border-bottom: 1px solid var(--ink) !important; }
+          .skills-grid > div:last-child { border-bottom: none !important; }
+          .edu-row { grid-template-columns: 1fr !important; gap: 4px !important; }
+        }
+      `}</style>
     </section>
   );
 }
