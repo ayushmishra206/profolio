@@ -63,14 +63,14 @@ export default function HeroSection() {
             }}
           >
             <span style={{ display: "block" }}>
-              Drupal{" "}
-              <span style={{ fontStyle: "italic", color: "var(--accent)" }}>+</span> CiviCRM
+              Software{" "}
+              <span style={{ fontStyle: "italic", color: "var(--accent)" }}>engineer</span>
             </span>
             <span style={{ display: "block", fontWeight: 400, paddingLeft: "6%" }}>
-              engineer for
+              untangling big,
             </span>
             <span style={{ display: "block" }}>
-              <span style={{ fontStyle: "italic" }}>membership</span> platforms.
+              <span style={{ fontStyle: "italic" }}>opinionated</span> systems.
             </span>
           </h1>
         </div>
@@ -102,8 +102,8 @@ export default function HeroSection() {
                 textWrap: "pretty",
               }}
             >
-              I build and maintain Drupal + CiviCRM platforms for membership organisations — member portals,
-              event and case management, and the long-running migrations that keep them on supported versions.
+              I build and untangle large Drupal systems — the kind where a CRM, a self-service portal, and a QA
+              team all need to agree on the same Tuesday.
             </p>
 
             <div style={{ display: "flex", gap: 10, marginTop: 22, flexWrap: "wrap" }}>
