@@ -51,7 +51,7 @@ export default function HeroSection() {
         </div>
 
         {/* Headline — oversized mixed-style display */}
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", marginTop: "auto" }}>
           <h1
             className="serif"
             style={{
