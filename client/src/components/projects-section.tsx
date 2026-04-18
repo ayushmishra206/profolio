@@ -16,8 +16,26 @@ interface Project {
 
 const PROJECTS: Project[] = [
   {
-    id: "splitease",
+    id: "membership-platforms",
     num: "01",
+    year: "2022–26",
+    title: "Membership Platforms",
+    kind: "Client work · Drupal + CiviCRM",
+    status: "Ongoing",
+    blurb:
+      "Lead-engineering work on Drupal + CiviCRM platforms for membership organisations, professional bodies, and regulators — long-lived sites where the CRM, the portal, and the content team all have to stay in sync through every release.",
+    lines: [
+      "Own release engineering on a shared Drupal + CiviCRM codebase serving 10+ client production sites.",
+      "Shipped a CiviCRM 5.x → 6.x major-version upgrade across the fleet without client-facing downtime.",
+      "Maintain a shared Bootstrap 5 theme layer consumed across five client deployments.",
+      "Architected a Member Directory performance rework for an org with a five-figure member count.",
+    ],
+    stack: ["Drupal 7/8/9/10", "CiviCRM 5/6", "Bootstrap 5", "PHP", "MySQL", "Docker"],
+    links: {},
+  },
+  {
+    id: "splitease",
+    num: "02",
     year: "2025",
     title: "SplitEase",
     kind: "Product · Next.js",
@@ -37,7 +55,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "medixgpt",
-    num: "02",
+    num: "03",
     year: "2025",
     title: "MedixGPT",
     kind: "Product · Clinical companion",
@@ -54,7 +72,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "flow",
-    num: "03",
+    num: "04",
     year: "2025",
     title: "Flow",
     kind: "Chrome extension · Sales copilot",
@@ -71,7 +89,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "discover-weekly",
-    num: "04",
+    num: "05",
     year: "2024",
     title: "Discover Weekly Saver",
     kind: "Tooling · Python",
@@ -88,7 +106,7 @@ const PROJECTS: Project[] = [
   },
   {
     id: "profolio",
-    num: "05",
+    num: "06",
     year: "2026",
     title: "Profolio",
     kind: "Open source · This site",

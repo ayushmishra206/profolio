@@ -1,10 +1,10 @@
 import { scrollTo } from "@/components/navigation";
 
 const LEDGER = [
+  { n: "5+", label: "Years shipping Drupal" },
+  { n: "100+", label: "PRs merged in 2025" },
   { n: "50+", label: "Drupal core patches" },
-  { n: "1.2M", label: "Monthly visitors served" },
-  { n: "12", label: "Enterprise launches" },
-  { n: "4+", label: "Years in the weeds" },
+  { n: "13", label: "Client platforms in prod" },
 ];
 
 export default function HeroSection() {
@@ -63,14 +63,14 @@ export default function HeroSection() {
             }}
           >
             <span style={{ display: "block" }}>
-              Senior Drupal{" "}
-              <span style={{ fontStyle: "italic", color: "var(--accent)" }}>engineer</span>
+              Drupal{" "}
+              <span style={{ fontStyle: "italic", color: "var(--accent)" }}>+</span> CiviCRM
             </span>
             <span style={{ display: "block", fontWeight: 400, paddingLeft: "6%" }}>
-              untangling big,
+              engineer for
             </span>
             <span style={{ display: "block" }}>
-              <span style={{ fontStyle: "italic" }}>opinionated</span> systems.
+              <span style={{ fontStyle: "italic" }}>membership</span> platforms.
             </span>
           </h1>
         </div>
@@ -102,8 +102,8 @@ export default function HeroSection() {
                 textWrap: "pretty",
               }}
             >
-              I build and untangle large Drupal systems — the kind where CiviCRM, a membership portal, and a content
-              team all need to agree on the same Tuesday.
+              I build and maintain Drupal + CiviCRM platforms for membership organisations — member portals,
+              event and case management, and the long-running migrations that keep them on supported versions.
             </p>
 
             <div style={{ display: "flex", gap: 10, marginTop: 22, flexWrap: "wrap" }}>
@@ -147,12 +147,12 @@ export default function HeroSection() {
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Focus
               </dt>
-              <dd style={{ margin: 0 }}>Drupal 9/10 · CiviCRM · platform migrations</dd>
+              <dd style={{ margin: 0 }}>Drupal 7–10 · CiviCRM · platform releases · migrations</dd>
 
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Since
               </dt>
-              <dd style={{ margin: 0 }}>2020 — four years in production</dd>
+              <dd style={{ margin: 0 }}>2020 — 5+ years in production</dd>
 
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Contact

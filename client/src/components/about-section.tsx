@@ -1,10 +1,10 @@
 import SectionLabel from "@/components/section-label";
 
 const HIGHLIGHTS: Array<[string, string]> = [
-  ["Technical excellence", "Zero critical post-launch issues across the current slate."],
-  ["Open source", "50+ core contributions; GSoC mentor, 2024."],
-  ["Mentorship", "Two juniors leveled up, still in my DMs."],
-  ["Clarity", "Docs that shortcut clarification loops by 15%."],
+  ["Platform ownership", "Lead maintainer on a shared Drupal + CiviCRM codebase serving 10+ client sites."],
+  ["Release discipline", "100+ merged PRs in 8 months across 17 repos, zero critical regressions."],
+  ["Open source", "50+ accepted Drupal core patches; GSoC mentor, 2024."],
+  ["Upgrades", "D7→D10 and CiviCRM 5.x→6.x moves without client-facing downtime."],
 ];
 
 export default function AboutSection() {
@@ -39,11 +39,10 @@ export default function AboutSection() {
                   fontWeight: 300,
                 }}
               >
-                “The fun part isn't the code. It's the Tuesday when the client, the content team, and the CRM finally
-                agree.”
+                “Membership platforms live for a decade. The work isn't the launch — it's every release after.”
               </p>
               <div className="mono caps" style={{ color: "var(--ink-soft)", marginTop: 20 }}>
-                — from a standup, probably
+                — what I tell every new client
               </div>
             </div>
           </aside>
@@ -59,10 +58,9 @@ export default function AboutSection() {
                 textWrap: "pretty",
               }}
             >
-              I started out as a Computer Applications graduate who mostly wrote Drupal modules in the corner of a
-              living room. Four years on, I lead architecture on the kind of Drupal + CiviCRM builds that take an org
-              chart to explain — membership portals with five audiences, migrations with no downtime budget, CRMs that
-              can't afford to lose a donor record.
+              I've spent five years working on one kind of system: long-lived Drupal platforms built around a CiviCRM
+              backbone. Professional associations, regulators, training bodies, research networks — organisations
+              whose members, events, and case data have to survive multiple governments and half a dozen staff turnovers.
             </p>
             <p
               className="serif"
@@ -74,18 +72,20 @@ export default function AboutSection() {
                 textWrap: "pretty",
               }}
             >
-              The work I'm proudest of rarely looks dramatic from the outside. It's the release that went out on a
-              Thursday without any 3am Slack messages. It's the handoff to an internal team that didn't need a call.
-              It's <em>50+ patches</em> back into Drupal core because somebody else shouldn't have to hit the same wall
-              twice.
+              At Compuco I'm a lead engineer on a shared Drupal + CiviCRM codebase serving 10+ client platforms.
+              I own the release pipeline, the shared theme layer, and the integration work that keeps the CRM and
+              the website in agreement across major upgrades. The numbers are real: <em>100+ merged PRs across 17
+              repos</em> in the last eight months, with zero critical post-launch regressions on features I led.
             </p>
             <p
               className="serif"
               style={{ margin: 0, fontSize: 19, lineHeight: 1.65, fontWeight: 400, textWrap: "pretty" }}
             >
-              Outside the day job I mentor GSoC students, ship the occasional side project (an expense-splitter, a
-              Gmail sales copilot, a Spotify archive tool), and argue with myself about whether to ship Drupal or Next
-              for small personal sites. (Mostly Drupal still wins, if we're being honest.)
+              Before Compuco I shipped a Drupal 7→8 migration on a publishing platform doing a million monthly
+              visits, contributed 50+ patches back to Drupal core, and mentored two juniors through their first
+              module builds. In 2024 I did a full season as a GSoC mentor for the Drupal Association. Side of desk
+              I build small products — an expense-splitter, a clinical-reasoning companion, a Gmail sales copilot
+              — mostly to stay honest about the stack outside my day job.
             </p>
 
             <div
