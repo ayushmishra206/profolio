@@ -31,16 +31,16 @@ const PROJECTS: Project[] = [
     ],
     stack: ["Next.js 16", "TypeScript", "Prisma", "Neon Postgres", "NextAuth", "Tailwind"],
     links: {
-      live: "https://splitease-ayush-mishras-projects-be52fc80.vercel.app",
+      live: "https://split.ayushmishra.com",
       repo: "https://github.com/ayushmishra206/Splitease",
     },
   },
   {
-    id: "snapdx",
+    id: "medixgpt",
     num: "02",
     year: "2025",
-    title: "SnapDx",
-    kind: "Product · MedixGPT",
+    title: "MedixGPT",
+    kind: "Product · Clinical companion",
     status: "Live",
     blurb:
       "A clinical companion that turns a symptom snapshot into structured differentials — built for curious patients and time-poor clinicians, not for replacing either.",
@@ -50,7 +50,7 @@ const PROJECTS: Project[] = [
       "Designed as a companion tool, with clear non-diagnostic framing throughout.",
     ],
     stack: ["TypeScript", "Next.js", "LLMs"],
-    links: { live: "https://snapdx.vercel.app", repo: "https://github.com/ayushmishra206/medixgpt" },
+    links: { live: "https://www.medixgpt.com" },
   },
   {
     id: "flow",
@@ -87,25 +87,8 @@ const PROJECTS: Project[] = [
     links: { repo: "https://github.com/ayushmishra206/spotify-autosave-discover-weekly" },
   },
   {
-    id: "kalshibot",
-    num: "05",
-    year: "2025",
-    title: "Kalshi Bot",
-    kind: "Experiment · Python",
-    status: "Research",
-    blurb:
-      "A sandboxed Python agent that talks to the Kalshi prediction-market API — part curiosity project, part excuse to write careful market-making logic.",
-    lines: [
-      "Clean API wrapper over Kalshi endpoints with rate-limiting and token refresh baked in.",
-      "Pluggable strategy layer so new signals can be dropped in without touching the I/O.",
-      "Runs fully offline in paper-trade mode for iteration before anything goes live.",
-    ],
-    stack: ["Python", "Kalshi API"],
-    links: { repo: "https://github.com/ayushmishra206/kalshibot" },
-  },
-  {
     id: "profolio",
-    num: "06",
+    num: "05",
     year: "2026",
     title: "Profolio",
     kind: "Open source · This site",
