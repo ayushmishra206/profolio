@@ -3,7 +3,7 @@ import SectionLabel from "@/components/section-label";
 const HIGHLIGHTS: Array<[string, string]> = [
   ["Platform ownership", "Lead maintainer on a shared Drupal + CiviCRM codebase serving 10+ client sites."],
   ["Release discipline", "100+ merged PRs in 8 months across 17 repos, zero critical regressions."],
-  ["Open source", "50+ accepted Drupal core patches; GSoC mentor, 2024."],
+  ["Open source", "60+ accepted Drupal core patches; GSoC mentor, 2024."],
   ["Upgrades", "D7→D10 and CiviCRM 5.x→6.x moves without client-facing downtime."],
 ];
 
@@ -82,7 +82,7 @@ export default function AboutSection() {
               style={{ margin: 0, fontSize: 19, lineHeight: 1.65, fontWeight: 400, textWrap: "pretty" }}
             >
               Before Compuco I shipped a Drupal 7→8 migration on a publishing platform doing a million monthly
-              visits, contributed 50+ patches back to Drupal core, and mentored two juniors through their first
+              visits, contributed 60+ patches back to Drupal core, and mentored two juniors through their first
               module builds. In 2024 I did a full season as a GSoC mentor for the Drupal Association. Side of desk
               I build small products — an expense-splitter, a clinical-reasoning companion, a Gmail sales copilot
               — mostly to stay honest about the stack outside my day job.

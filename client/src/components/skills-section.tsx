@@ -11,7 +11,7 @@ interface SkillGroup {
 const SKILL_GROUPS: SkillGroup[] = [
   {
     title: "Drupal",
-    caption: "Versions 7 – 10 · 50+ accepted core patches",
+    caption: "Versions 7 – 10 · 60+ accepted core patches",
     items: [
       ["Custom module development (OOP PHP)", "Expert"],
       ["Installation profiles / distributions", "Expert"],

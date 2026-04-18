@@ -40,7 +40,7 @@ const EXPERIENCE: Experience[] = [
     lines: [
       "Delivered a Drupal 7→8 migration for a 1M+ MAU tourism publishing platform — MySQL tuning, Varnish strategy, Pattern Lab theme redesign.",
       "Led backend on an education data platform: REST integrations pulling 2000+ responses, cron syncing 1500+ nodes, custom content-ranking algorithm.",
-      "Authored 50+ accepted patches to Drupal core via client-engagement-driven issue triage.",
+      "Authored 60+ accepted patches to Drupal core via client-engagement-driven issue triage.",
       "Mentored two junior engineers through their first module builds and review discipline.",
     ],
     stack: ["Drupal 7/8", "REST APIs", "Migrations", "Mentorship"],

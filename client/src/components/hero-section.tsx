@@ -3,7 +3,7 @@ import { scrollTo } from "@/components/navigation";
 const LEDGER = [
   { n: "5+", label: "Years shipping Drupal" },
   { n: "100+", label: "PRs merged in 2025" },
-  { n: "50+", label: "Drupal core patches" },
+  { n: "60+", label: "Drupal core patches" },
   { n: "13", label: "Client platforms in prod" },
 ];
 
