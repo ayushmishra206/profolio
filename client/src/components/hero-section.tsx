@@ -9,15 +9,24 @@ const LEDGER = [
 
 export default function HeroSection() {
   return (
-    <section id="top" style={{ paddingTop: "140px", paddingBottom: "80px" }}>
-      <div className="container-p">
+    <section
+      id="top"
+      style={{
+        paddingTop: "96px",
+        paddingBottom: "28px",
+        minHeight: "100svh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div className="container-p" style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {/* Top meta strip */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "baseline",
-            marginBottom: 80,
+            marginBottom: "clamp(16px, 2.4vh, 28px)",
             flexWrap: "wrap",
             gap: 12,
           }}
@@ -47,19 +56,22 @@ export default function HeroSection() {
             className="serif"
             style={{
               margin: 0,
-              fontSize: "clamp(52px, 11vw, 172px)",
-              lineHeight: 0.92,
+              fontSize: "clamp(40px, 7.2vw, 120px)",
+              lineHeight: 0.95,
               letterSpacing: "-0.035em",
               fontWeight: 300,
             }}
           >
-            <span style={{ display: "block" }}>Senior Drupal</span>
-            <span style={{ display: "block", fontStyle: "italic", color: "var(--accent)", paddingLeft: "8%" }}>
-              engineer
+            <span style={{ display: "block" }}>
+              Senior Drupal{" "}
+              <span style={{ fontStyle: "italic", color: "var(--accent)" }}>engineer</span>
             </span>
-            <span style={{ display: "block", fontWeight: 400 }}>untangling big,</span>
-            <span style={{ display: "block", fontStyle: "italic", paddingLeft: "18%" }}>opinionated</span>
-            <span style={{ display: "block" }}>systems.</span>
+            <span style={{ display: "block", fontWeight: 400, paddingLeft: "6%" }}>
+              untangling big,
+            </span>
+            <span style={{ display: "block" }}>
+              <span style={{ fontStyle: "italic" }}>opinionated</span> systems.
+            </span>
           </h1>
         </div>
 
@@ -69,20 +81,20 @@ export default function HeroSection() {
           style={{
             display: "grid",
             gridTemplateColumns: "1.4fr 1fr",
-            gap: "clamp(40px, 6vw, 120px)",
-            marginTop: 80,
+            gap: "clamp(32px, 5vw, 88px)",
+            marginTop: "clamp(24px, 3.2vh, 44px)",
             alignItems: "start",
           }}
         >
           <div>
-            <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 16 }}>
+            <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 10 }}>
               ¶ On the record
             </div>
             <p
               className="serif"
               style={{
                 margin: 0,
-                fontSize: "clamp(20px, 2.1vw, 26px)",
+                fontSize: "clamp(17px, 1.7vw, 22px)",
                 lineHeight: 1.45,
                 color: "var(--ink)",
                 fontWeight: 300,
@@ -94,7 +106,7 @@ export default function HeroSection() {
               team all need to agree on the same Tuesday.
             </p>
 
-            <div style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 10, marginTop: 22, flexWrap: "wrap" }}>
               <button className="btn-p" onClick={() => scrollTo("work")}>
                 See the work{" "}
                 <span className="mono" style={{ fontSize: 12, opacity: 0.7 }}>
@@ -118,8 +130,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <aside style={{ borderTop: "1px solid var(--ink)", paddingTop: 20 }}>
-            <dl style={{ margin: 0, display: "grid", gridTemplateColumns: "auto 1fr", columnGap: 24, rowGap: 14 }}>
+          <aside style={{ borderTop: "1px solid var(--ink)", paddingTop: 14 }}>
+            <dl style={{ margin: 0, display: "grid", gridTemplateColumns: "auto 1fr", columnGap: 20, rowGap: 8, fontSize: 14 }}>
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Based
               </dt>
@@ -155,26 +167,33 @@ export default function HeroSection() {
         </div>
 
         {/* Ledger numbers */}
-        <div style={{ marginTop: 120, borderTop: "1px solid var(--ink)", borderBottom: "1px solid var(--ink)" }}>
+        <div
+          style={{
+            marginTop: "auto",
+            paddingTop: "clamp(18px, 2.4vh, 32px)",
+            borderBottom: "1px solid var(--ink)",
+          }}
+        >
           <div
             className="ledger-grid"
             style={{
               display: "grid",
               gridTemplateColumns: `repeat(${LEDGER.length}, 1fr)`,
+              borderTop: "1px solid var(--ink)",
             }}
           >
             {LEDGER.map((l, i) => (
               <div
                 key={i}
                 style={{
-                  padding: "28px 24px",
+                  padding: "16px 18px",
                   borderRight: i < LEDGER.length - 1 ? "1px solid var(--rule)" : "none",
                 }}
               >
                 <div
                   className="serif"
                   style={{
-                    fontSize: "clamp(36px, 5vw, 64px)",
+                    fontSize: "clamp(26px, 3.4vw, 44px)",
                     lineHeight: 1,
                     fontWeight: 300,
                     letterSpacing: "-0.02em",
@@ -182,7 +201,7 @@ export default function HeroSection() {
                 >
                   {l.n}
                 </div>
-                <div className="mono caps" style={{ color: "var(--ink-soft)", marginTop: 10 }}>
+                <div className="mono caps" style={{ color: "var(--ink-soft)", marginTop: 6 }}>
                   {l.label}
                 </div>
               </div>
