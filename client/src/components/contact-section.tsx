@@ -358,22 +358,25 @@ export default function ContactSection() {
               <button className="btn-p" type="submit" disabled={status === "sending"}>
                 {status === "sending" ? "Sending…" : status === "sent" ? "Sent ✓" : "Send message"}
               </button>
-              <span
-                className="mono caps"
-                style={{
-                  color:
-                    status === "sent"
-                      ? "var(--sage)"
-                      : status === "error"
-                        ? "var(--accent)"
-                        : "var(--ink-faint)",
-                }}
-              >
-                {status === "sent" && "Thanks — I'll be in touch soon"}
-                {status === "error" && "Didn't go through — try email?"}
-                {status === "idle" && "Or just email directly"}
-                {status === "sending" && "One moment…"}
-              </span>
+              {status === "sent" && (
+                <span className="mono caps" style={{ color: "var(--sage)" }}>
+                  Thanks — I'll be in touch soon
+                </span>
+              )}
+              {status === "sending" && (
+                <span className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                  One moment…
+                </span>
+              )}
+              {(status === "idle" || status === "error") && (
+                <a
+                  href="mailto:ayushmishra206@gmail.com"
+                  className="mono caps link-u"
+                  style={{ color: status === "error" ? "var(--accent)" : "var(--ink-faint)" }}
+                >
+                  {status === "error" ? "Didn't go through — email directly" : "Or just email directly"}
+                </a>
+              )}
             </div>
           </form>
         </div>
