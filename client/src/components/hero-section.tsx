@@ -1,102 +1,204 @@
-import { Button } from "@/components/ui/button";
-import { Mail, Github, Linkedin } from "lucide-react";
-import { SiDrupal } from "react-icons/si";
+import { scrollTo } from "@/components/navigation";
+
+const LEDGER = [
+  { n: "50+", label: "Drupal core patches" },
+  { n: "1.2M", label: "Monthly visitors served" },
+  { n: "12", label: "Enterprise launches" },
+  { n: "4+", label: "Years in the weeds" },
+];
 
 export default function HeroSection() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offsetTop = element.offsetTop - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
-    <section id="home" className="pt-20 pb-16 bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen flex items-center">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-mono font-bold text-slate-900 mb-6 leading-tight">
-              <span className="text-primary">Hi, I'm</span><br />
-              <span className="relative">
-                Ayush Mishra
-              </span>
-            </h1>
-            <div className="text-xl sm:text-2xl text-slate-600 mb-8 font-medium">
-              <span className="text-primary font-mono">Senior Drupal Engineer</span> crafting scalable web solutions
-              <br />with <span className="text-green-600 font-semibold">50+ open source contributions</span>
+    <section id="top" style={{ paddingTop: "140px", paddingBottom: "80px" }}>
+      <div className="container-p">
+        {/* Top meta strip */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: 80,
+            flexWrap: "wrap",
+            gap: 12,
+          }}
+        >
+          <div className="mono caps" style={{ color: "var(--ink-soft)" }}>
+            Portfolio · Vol. IV · {new Date().getFullYear()}
+          </div>
+          <div className="mono caps" style={{ color: "var(--ink-soft)" }}>
+            <span
+              style={{
+                display: "inline-block",
+                width: 8,
+                height: 8,
+                background: "var(--accent)",
+                borderRadius: 999,
+                marginRight: 8,
+                verticalAlign: 1,
+              }}
+            />
+            Open to new work · Apr 2026
+          </div>
+        </div>
+
+        {/* Headline — oversized mixed-style display */}
+        <div style={{ position: "relative" }}>
+          <h1
+            className="serif"
+            style={{
+              margin: 0,
+              fontSize: "clamp(52px, 11vw, 172px)",
+              lineHeight: 0.92,
+              letterSpacing: "-0.035em",
+              fontWeight: 300,
+            }}
+          >
+            <span style={{ display: "block" }}>Senior Drupal</span>
+            <span style={{ display: "block", fontStyle: "italic", color: "var(--accent)", paddingLeft: "8%" }}>
+              engineer
+            </span>
+            <span style={{ display: "block", fontWeight: 400 }}>untangling big,</span>
+            <span style={{ display: "block", fontStyle: "italic", paddingLeft: "18%" }}>opinionated</span>
+            <span style={{ display: "block" }}>systems.</span>
+          </h1>
+        </div>
+
+        {/* Grid: blurb + masthead details */}
+        <div
+          className="hero-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.4fr 1fr",
+            gap: "clamp(40px, 6vw, 120px)",
+            marginTop: 80,
+            alignItems: "start",
+          }}
+        >
+          <div>
+            <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 16 }}>
+              ¶ On the record
             </div>
-            <p className="text-lg text-slate-600 mb-10 leading-relaxed max-w-xl">
-              Specialized in Drupal architecture, CiviCRM integrations, and delivering robust, 
-              scalable web applications. Proven track record of leading technical teams and 
-              contributing to impactful open-source projects.
+            <p
+              className="serif"
+              style={{
+                margin: 0,
+                fontSize: "clamp(20px, 2.1vw, 26px)",
+                lineHeight: 1.45,
+                color: "var(--ink)",
+                fontWeight: 300,
+                maxWidth: "58ch",
+                textWrap: "pretty",
+              }}
+            >
+              I build and untangle large Drupal systems — the kind where CiviCRM, a membership portal, and a content
+              team all need to agree on the same Tuesday.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                onClick={() => scrollToSection("experience")}
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+
+            <div style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap" }}>
+              <button className="btn-p" onClick={() => scrollTo("work")}>
+                See the work{" "}
+                <span className="mono" style={{ fontSize: 12, opacity: 0.7 }}>
+                  →
+                </span>
+              </button>
+              <button className="btn-p ghost" onClick={() => scrollTo("contact")}>
+                Start a conversation
+              </button>
+              <a
+                className="btn-p ghost"
+                href="https://docs.google.com/document/d/1IvrdXyAMyVwRIprCViROXEEkI5x98SvRNirkh1NGaQY/export?format=pdf"
+                target="_blank"
+                rel="noreferrer"
               >
-                View My Experience
-              </Button>
-              <Button 
-                onClick={() => scrollToSection("contact")}
-                variant="outline"
-                size="lg"
-                className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-8 py-4 transition-all duration-200"
-              >
-                Get In Touch
-              </Button>
-            </div>
-            <div className="flex items-center gap-6 mt-8">
-              <a 
-                href="mailto:ayushmishra206@gmail.com" 
-                className="text-slate-500 hover:text-primary transition-colors duration-200"
-                aria-label="Email"
-              >
-                <Mail className="w-6 h-6" />
-              </a>
-              <a 
-                href="https://github.com/ayushmishra206" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-slate-500 hover:text-primary transition-colors duration-200"
-                aria-label="GitHub"
-              >
-                <Github className="w-6 h-6" />
-              </a>
-              <a 
-                href="https://linkedin.com/in/ayushmishra206" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-slate-500 hover:text-primary transition-colors duration-200"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-6 h-6" />
-              </a>
-              <a 
-                href="https://drupal.org/u/ayushmishra206" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-slate-500 hover:text-primary transition-colors duration-200"
-                aria-label="Drupal.org Profile"
-              >
-                <SiDrupal className="w-6 h-6" />
+                Résumé, PDF{" "}
+                <span className="mono" style={{ fontSize: 11, opacity: 0.6 }}>
+                  ↗
+                </span>
               </a>
             </div>
           </div>
-          <div className="animate-slide-up lg:pl-8">
-            <img 
-              src="https://avatars.githubusercontent.com/u/30470224?v=4" 
-              alt="Professional developer portrait" 
-              className="rounded-2xl shadow-2xl w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-300"
-            />
+
+          <aside style={{ borderTop: "1px solid var(--ink)", paddingTop: 20 }}>
+            <dl style={{ margin: 0, display: "grid", gridTemplateColumns: "auto 1fr", columnGap: 24, rowGap: 14 }}>
+              <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                Based
+              </dt>
+              <dd style={{ margin: 0 }}>Jaipur, India · remote worldwide</dd>
+
+              <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                Now
+              </dt>
+              <dd style={{ margin: 0 }}>
+                Drupal Engineer (L2) at <span className="link-u">Compuco</span>
+              </dd>
+
+              <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                Focus
+              </dt>
+              <dd style={{ margin: 0 }}>Drupal 9/10 · CiviCRM · platform migrations</dd>
+
+              <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                Since
+              </dt>
+              <dd style={{ margin: 0 }}>2020 — four years in production</dd>
+
+              <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
+                Contact
+              </dt>
+              <dd style={{ margin: 0 }}>
+                <a className="link-u" href="mailto:ayushmishra206@gmail.com">
+                  ayushmishra206@gmail.com
+                </a>
+              </dd>
+            </dl>
+          </aside>
+        </div>
+
+        {/* Ledger numbers */}
+        <div style={{ marginTop: 120, borderTop: "1px solid var(--ink)", borderBottom: "1px solid var(--ink)" }}>
+          <div
+            className="ledger-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: `repeat(${LEDGER.length}, 1fr)`,
+            }}
+          >
+            {LEDGER.map((l, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "28px 24px",
+                  borderRight: i < LEDGER.length - 1 ? "1px solid var(--rule)" : "none",
+                }}
+              >
+                <div
+                  className="serif"
+                  style={{
+                    fontSize: "clamp(36px, 5vw, 64px)",
+                    lineHeight: 1,
+                    fontWeight: 300,
+                    letterSpacing: "-0.02em",
+                  }}
+                >
+                  {l.n}
+                </div>
+                <div className="mono caps" style={{ color: "var(--ink-soft)", marginTop: 10 }}>
+                  {l.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .ledger-grid { grid-template-columns: 1fr 1fr !important; }
+          .ledger-grid > div:nth-child(2n) { border-right: none !important; }
+          .ledger-grid > div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+        }
+      `}</style>
     </section>
   );
 }

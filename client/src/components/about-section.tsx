@@ -1,86 +1,132 @@
-import { CheckCircle } from "lucide-react";
+import SectionLabel from "@/components/section-label";
+
+const HIGHLIGHTS: Array<[string, string]> = [
+  ["Technical excellence", "Zero critical post-launch issues across the current slate."],
+  ["Open source", "50+ core contributions; GSoC mentor, 2024."],
+  ["Mentorship", "Two juniors leveled up, still in my DMs."],
+  ["Clarity", "Docs that shortcut clarification loops by 15%."],
+];
 
 export default function AboutSection() {
-  const stats = [
-    { value: "5+", label: "Concurrent Projects" },
-    { value: "50+", label: "Open Source Contributions" },
-    { value: "20%", label: "Efficiency Improvement" },
-    { value: "2+", label: "Developers Mentored" },
-  ];
-
-  const coreValues = [
-    { title: "Technical Excellence", description: "Zero critical post-launch issues" },
-    { title: "Open Source", description: "Contributing back to the community" },
-    { title: "Mentorship", description: "Fostering growth in others" },
-    { title: "Innovation", description: "Solving complex challenges creatively" },
-  ];
-
   return (
-    <section id="about" className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-mono font-bold text-slate-900 mb-4">
-            About <span className="text-primary">Me</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            My journey from BCA graduate to senior Drupal engineer, driven by passion for 
-            open-source development and creating impactful web solutions.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <div className="prose prose-lg text-slate-600">
-              <p className="leading-relaxed">
-                With over <strong className="text-primary">4+ years of professional experience</strong>, 
-                I've evolved from a curious Computer Applications graduate into a results-oriented 
-                Software Engineer specializing in complex Drupal ecosystems and CiviCRM integrations.
+    <section id="about" style={{ padding: "120px 0", borderTop: "1px solid var(--rule)" }}>
+      <div className="container-p">
+        <SectionLabel num="§ 03" caption="A short biography, told plainly">
+          About
+        </SectionLabel>
+
+        <div
+          className="about-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1.4fr",
+            gap: "clamp(40px, 7vw, 120px)",
+            marginTop: 60,
+          }}
+        >
+          <aside>
+            <div style={{ borderTop: "1px solid var(--ink)", paddingTop: 20 }}>
+              <div className="mono caps" style={{ color: "var(--ink-faint)", marginBottom: 12 }}>
+                Pullquote
+              </div>
+              <p
+                className="serif"
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(24px, 2.6vw, 34px)",
+                  fontStyle: "italic",
+                  lineHeight: 1.3,
+                  fontWeight: 300,
+                }}
+              >
+                “The fun part isn't the code. It's the Tuesday when the client, the content team, and the CRM finally
+                agree.”
               </p>
-              <p className="leading-relaxed">
-                My expertise spans the entire software development lifecycle, from architectural 
-                planning to deployment and maintenance. I've successfully led technical teams, 
-                mentored junior developers, and contributed significantly to the open-source community 
-                with <strong className="text-green-600">50+ Drupal core contributions</strong>.
-              </p>
-              <p className="leading-relaxed">
-                What drives me is the challenge of translating complex client requirements into 
-                robust, scalable solutions. Whether it's architecting a membership portal for 
-                thousands of users or optimizing performance for high-traffic websites, I thrive 
-                on delivering technical excellence that creates real impact.
-              </p>
+              <div className="mono caps" style={{ color: "var(--ink-soft)", marginTop: 20 }}>
+                — from a standup, probably
+              </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat, index) => (
-                <div key={index} className="bg-slate-50 p-6 rounded-lg border border-slate-200">
-                  <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm text-slate-600 font-medium">{stat.label}</div>
+          </aside>
+
+          <div>
+            <p
+              className="serif"
+              style={{
+                margin: "0 0 22px",
+                fontSize: 19,
+                lineHeight: 1.65,
+                fontWeight: 400,
+                textWrap: "pretty",
+              }}
+            >
+              I started out as a Computer Applications graduate who mostly wrote Drupal modules in the corner of a
+              living room. Four years on, I lead architecture on the kind of Drupal + CiviCRM builds that take an org
+              chart to explain — membership portals with five audiences, migrations with no downtime budget, CRMs that
+              can't afford to lose a donor record.
+            </p>
+            <p
+              className="serif"
+              style={{
+                margin: "0 0 22px",
+                fontSize: 19,
+                lineHeight: 1.65,
+                fontWeight: 400,
+                textWrap: "pretty",
+              }}
+            >
+              The work I'm proudest of rarely looks dramatic from the outside. It's the release that went out on a
+              Thursday without any 3am Slack messages. It's the handoff to an internal team that didn't need a call.
+              It's <em>50+ patches</em> back into Drupal core because somebody else shouldn't have to hit the same wall
+              twice.
+            </p>
+            <p
+              className="serif"
+              style={{ margin: 0, fontSize: 19, lineHeight: 1.65, fontWeight: 400, textWrap: "pretty" }}
+            >
+              Outside the day job I mentor GSoC students, ship the occasional side project (an expense-splitter, a
+              Gmail sales copilot, a Spotify archive tool), and argue with myself about whether to ship Drupal or Next
+              for small personal sites. (Mostly Drupal still wins, if we're being honest.)
+            </p>
+
+            <div
+              style={{
+                marginTop: 48,
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 0,
+                borderTop: "1px solid var(--rule)",
+              }}
+            >
+              {HIGHLIGHTS.map(([title, body], i) => (
+                <div
+                  key={i}
+                  style={{
+                    padding: "22px 0",
+                    paddingRight: i % 2 === 0 ? 20 : 0,
+                    paddingLeft: i % 2 === 1 ? 20 : 0,
+                    borderBottom: "1px solid var(--rule)",
+                    borderRight: i % 2 === 0 ? "1px solid var(--rule)" : "none",
+                  }}
+                >
+                  <div className="mono caps" style={{ color: "var(--accent)", marginBottom: 6 }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <div className="serif" style={{ fontSize: 20, lineHeight: 1.3, marginBottom: 4 }}>
+                    {title}
+                  </div>
+                  <div style={{ color: "var(--ink-soft)", fontSize: 14, lineHeight: 1.5 }}>{body}</div>
                 </div>
               ))}
             </div>
           </div>
-          
-          <div className="space-y-8">
-            <img 
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Modern developer workspace with multiple monitors and code" 
-              className="rounded-xl shadow-lg w-full"
-            />
-            
-            <div className="bg-gradient-to-r from-primary/5 to-blue-50 p-8 rounded-xl border border-primary/10">
-              <h3 className="text-xl font-mono font-semibold text-slate-900 mb-4">Core Values</h3>
-              <ul className="space-y-3">
-                {coreValues.map((value, index) => (
-                  <li key={index} className="flex items-center text-slate-700">
-                    <CheckCircle className="text-primary w-5 h-5 mr-3 flex-shrink-0" />
-                    <span><strong>{value.title}:</strong> {value.description}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .about-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 }
