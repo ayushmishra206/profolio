@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import SectionLabel from "@/components/section-label";
 import { useToast } from "@/hooks/use-toast";
 
@@ -9,6 +9,15 @@ interface FormData {
   message: string;
   type: string;
 }
+
+const PROJECT_TYPES: Array<{ value: string; label: string }> = [
+  { value: "drupal", label: "Drupal development" },
+  { value: "civicrm", label: "CiviCRM integration" },
+  { value: "migration", label: "Site migration" },
+  { value: "performance", label: "Performance optimization" },
+  { value: "consult", label: "Technical consultation" },
+  { value: "other", label: "Other" },
+];
 
 const SOCIALS = [
   { label: "GitHub", handle: "@ayushmishra206", href: "https://github.com/ayushmishra206" },
@@ -23,6 +32,26 @@ export default function ContactSection() {
   const { toast } = useToast();
   const [form, setForm] = useState<FormData>({ name: "", email: "", subject: "", message: "", type: "" });
   const [status, setStatus] = useState<Status>("idle");
+  const [typeOpen, setTypeOpen] = useState(false);
+  const typeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!typeOpen) return;
+    const onDown = (e: MouseEvent) => {
+      if (typeRef.current && !typeRef.current.contains(e.target as Node)) setTypeOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setTypeOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [typeOpen]);
+
+  const selectedType = PROJECT_TYPES.find((t) => t.value === form.type);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -131,7 +160,7 @@ export default function ContactSection() {
                 Based
               </div>
               <div className="serif" style={{ fontSize: 20 }}>
-                Jaipur, India · remote worldwide
+                New Delhi, India
               </div>
             </div>
           </div>
@@ -185,24 +214,130 @@ export default function ContactSection() {
               />
             </label>
 
-            <label style={{ display: "block", marginTop: 28 }}>
+            <div style={{ marginTop: 28 }}>
               <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>
                 Project type
               </div>
-              <select
-                style={{ ...inputStyle, appearance: "none", paddingRight: 20 }}
-                value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value })}
-              >
-                <option value="">Select one (optional)</option>
-                <option value="drupal">Drupal development</option>
-                <option value="civicrm">CiviCRM integration</option>
-                <option value="migration">Site migration</option>
-                <option value="performance">Performance optimization</option>
-                <option value="consult">Technical consultation</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
+              <div ref={typeRef} style={{ position: "relative" }}>
+                <button
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={typeOpen}
+                  onClick={() => setTypeOpen((o) => !o)}
+                  style={{
+                    ...inputStyle,
+                    paddingRight: 24,
+                    textAlign: "left",
+                    cursor: "pointer",
+                    color: selectedType ? "var(--ink)" : "var(--ink-faint)",
+                    borderBottomColor: typeOpen ? "var(--ink)" : "var(--rule)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 12,
+                  }}
+                >
+                  <span style={{ fontStyle: selectedType ? "normal" : "italic" }}>
+                    {selectedType ? selectedType.label : "Select one (optional)"}
+                  </span>
+                  <span
+                    className="mono"
+                    aria-hidden="true"
+                    style={{
+                      fontSize: 11,
+                      color: "var(--ink-faint)",
+                      transition: "transform .2s ease",
+                      transform: typeOpen ? "rotate(180deg)" : "none",
+                    }}
+                  >
+                    ▾
+                  </span>
+                </button>
+
+                {typeOpen && (
+                  <ul
+                    role="listbox"
+                    style={{
+                      position: "absolute",
+                      top: "calc(100% + 6px)",
+                      left: 0,
+                      right: 0,
+                      margin: 0,
+                      padding: 6,
+                      listStyle: "none",
+                      background: "var(--paper)",
+                      border: "1px solid var(--ink)",
+                      boxShadow: "0 10px 24px -12px rgba(26,24,21,0.18)",
+                      zIndex: 20,
+                      animation: "projFade .18s ease",
+                    }}
+                  >
+                    {form.type && (
+                      <li role="option" aria-selected={false}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setForm({ ...form, type: "" });
+                            setTypeOpen(false);
+                          }}
+                          className="mono caps"
+                          style={{
+                            width: "100%",
+                            textAlign: "left",
+                            background: "transparent",
+                            border: 0,
+                            padding: "10px 12px",
+                            color: "var(--ink-faint)",
+                            cursor: "pointer",
+                            fontSize: 11,
+                            letterSpacing: "0.12em",
+                          }}
+                          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+                          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--ink-faint)")}
+                        >
+                          Clear selection
+                        </button>
+                      </li>
+                    )}
+                    {PROJECT_TYPES.map((t) => {
+                      const on = t.value === form.type;
+                      return (
+                        <li key={t.value} role="option" aria-selected={on}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setForm({ ...form, type: t.value });
+                              setTypeOpen(false);
+                            }}
+                            style={{
+                              width: "100%",
+                              textAlign: "left",
+                              background: on ? "var(--paper-2)" : "transparent",
+                              border: 0,
+                              borderLeft: on ? "3px solid var(--accent)" : "3px solid transparent",
+                              padding: "12px 14px",
+                              fontFamily: "var(--sans)",
+                              fontSize: 15,
+                              color: "var(--ink)",
+                              cursor: "pointer",
+                              transition: "background .15s ease, border-color .15s ease",
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!on) e.currentTarget.style.background = "var(--paper-2)";
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!on) e.currentTarget.style.background = "transparent";
+                            }}
+                          >
+                            {t.label}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
 
             <label style={{ display: "block", marginTop: 28 }}>
               <div className="mono caps" style={{ color: "var(--ink-soft)", marginBottom: 4, fontSize: 10 }}>

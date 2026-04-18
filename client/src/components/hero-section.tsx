@@ -123,7 +123,7 @@ export default function HeroSection() {
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Based
               </dt>
-              <dd style={{ margin: 0 }}>Jaipur, India · remote worldwide</dd>
+              <dd style={{ margin: 0 }}>New Delhi, India</dd>
 
               <dt className="mono caps" style={{ color: "var(--ink-faint)" }}>
                 Now
